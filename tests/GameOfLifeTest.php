@@ -16,10 +16,18 @@ class GameOfLifeTest extends TestCase
     public function prints_the_world(): void
     {
         $output = $this->prophesize(OutputInterface::class);
-        $gameOfLife = new GameOfLife();
+        $world = [
+            ['*', '.', '.'],
+            ['.', '*', '.'],
+            ['.', '.', '*'],
+        ];
+        $gameOfLife = new GameOfLife($world);
 
         $gameOfLife->print($output->reveal());
 
-        $output->writeln(Argument::any())->shouldHaveBeenCalled();
+        $output->writeln(Argument::any())->shouldHaveBeenCalledTimes(3);
+        $output->writeln('*..')->shouldHaveBeenCalled();
+        $output->writeln('.*.')->shouldHaveBeenCalled();
+        $output->writeln('..*')->shouldHaveBeenCalled();
     }
 }

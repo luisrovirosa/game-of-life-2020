@@ -6,8 +6,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GameOfLife
 {
-    public function __construct()
+    private array $world;
+
+    public function __construct(array $world)
     {
+        $this->world = $world;
     }
 
     public function run(): void
@@ -16,8 +19,8 @@ class GameOfLife
 
     public function print(OutputInterface $output): void
     {
-        $output->writeln('...');
-        $output->writeln('...');
-        $output->writeln('...');
+        foreach ($this->world as $file) {
+            $output->writeln(implode('', $file));
+        }
     }
 }
