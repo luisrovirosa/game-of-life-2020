@@ -13,12 +13,10 @@ class GameOfLife
         $this->output = $output;
     }
 
-    public function giveMeAProperName(): bool
-    {
-        return true;
-    }
-
     public function run(): void
     {
+        $this->output->writeln('...');
+        $this->output->writeln('...');
+        $this->output->writeln('...');
     }
 }

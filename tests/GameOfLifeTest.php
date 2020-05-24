@@ -4,14 +4,22 @@ namespace Katas\Tests;
 
 use Katas\GameOfLife;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Output\NullOutput;
+use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class GameOfLifeTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @test */
-    public function please_rename_me_or_delete_me(): void
+    public function prints_the_world(): void
     {
-        $myObject = new GameOfLife(new NullOutput());
-        $this->assertTrue($myObject->giveMeAProperName());
+        $output = $this->prophesize(OutputInterface::class);
+        $gameOfLife = new GameOfLife($output->reveal());
+
+        $gameOfLife->run();
+
+        $output->writeln(Argument::any())->shouldHaveBeenCalled();
     }
 }

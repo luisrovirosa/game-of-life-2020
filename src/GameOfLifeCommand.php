@@ -20,7 +20,9 @@ class GameOfLifeCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $gameOfLife = new GameOfLife($output);
+
         $gameOfLife->run();
+
         return 0;
     }
 }
