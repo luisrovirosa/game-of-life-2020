@@ -6,11 +6,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GameOfLife
 {
-    private OutputInterface $output;
-
-    public function __construct(OutputInterface $output)
+    public function __construct()
     {
-        $this->output = $output;
     }
 
     public function run(): void
@@ -19,8 +16,8 @@ class GameOfLife
 
     public function print(OutputInterface $output): void
     {
-        $this->output->writeln('...');
-        $this->output->writeln('...');
-        $this->output->writeln('...');
+        $output->writeln('...');
+        $output->writeln('...');
+        $output->writeln('...');
     }
 }

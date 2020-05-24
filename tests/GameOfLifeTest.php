@@ -16,7 +16,7 @@ class GameOfLifeTest extends TestCase
     public function prints_the_world(): void
     {
         $output = $this->prophesize(OutputInterface::class);
-        $gameOfLife = new GameOfLife($output->reveal());
+        $gameOfLife = new GameOfLife();
 
         $gameOfLife->print($output->reveal());
 
