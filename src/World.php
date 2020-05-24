@@ -15,6 +15,15 @@ class World
         $this->cells = $cells;
     }
 
+    public function nextGeneration(): World
+    {
+        return new World([
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+        ]);
+    }
+
     public function print(OutputInterface $output)
     {
         foreach ($this->cells as $file) {
