@@ -30,4 +30,21 @@ class GameOfLifeTest extends TestCase
         $output->writeln('.*.')->shouldHaveBeenCalled();
         $output->writeln('..*')->shouldHaveBeenCalled();
     }
+
+    /** @test */
+    public function mutates_the_world(): void
+    {
+        $this->markTestIncomplete('Not yet');
+        $output = $this->prophesize(OutputInterface::class);
+        $world = [
+            ['.', '.', '.'],
+            ['.', '*', '.'],
+            ['.', '.', '.'],
+        ];
+        $gameOfLife = new GameOfLife($world);
+
+        $gameOfLife->print($output->reveal());
+
+        $output->writeln('...')->shouldHaveBeenCalledTimes(3);
+    }
 }
