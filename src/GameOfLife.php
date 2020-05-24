@@ -15,6 +15,10 @@ class GameOfLife
 
     public function run(): void
     {
+    }
+
+    public function print(OutputInterface $output): void
+    {
         $this->output->writeln('...');
         $this->output->writeln('...');
         $this->output->writeln('...');

@@ -22,6 +22,7 @@ class GameOfLifeCommand extends Command
         $gameOfLife = new GameOfLife($output);
 
         $gameOfLife->run();
+        $gameOfLife->print($output);
 
         return 0;
     }

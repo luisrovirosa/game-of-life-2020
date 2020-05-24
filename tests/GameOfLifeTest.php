@@ -18,7 +18,7 @@ class GameOfLifeTest extends TestCase
         $output = $this->prophesize(OutputInterface::class);
         $gameOfLife = new GameOfLife($output->reveal());
 
-        $gameOfLife->run();
+        $gameOfLife->print($output->reveal());
 
         $output->writeln(Argument::any())->shouldHaveBeenCalled();
     }
