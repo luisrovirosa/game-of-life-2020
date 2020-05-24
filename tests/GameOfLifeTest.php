@@ -34,7 +34,6 @@ class GameOfLifeTest extends TestCase
     /** @test */
     public function mutates_the_world(): void
     {
-        $this->markTestIncomplete('Not yet');
         $output = $this->prophesize(OutputInterface::class);
         $world = [
             ['.', '.', '.'],
@@ -43,8 +42,9 @@ class GameOfLifeTest extends TestCase
         ];
         $gameOfLife = new GameOfLife($world);
 
-        $gameOfLife->print($output->reveal());
+        $gameOfLife->run();
 
+        $gameOfLife->print($output->reveal());
         $output->writeln('...')->shouldHaveBeenCalledTimes(3);
     }
 }

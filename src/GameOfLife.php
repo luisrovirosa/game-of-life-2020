@@ -15,6 +15,7 @@ class GameOfLife
 
     public function run(): void
     {
+        $this->world = $this->world->nextGeneration();
     }
 
     public function print(OutputInterface $output): void
