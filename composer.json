@@ -1,7 +1,8 @@
 {
   "name": "codiumteam/php-docker-boostrap",
   "require": {
-    "php": "^7.4"
+    "php": "^7.4",
+    "symfony/console": "^5.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
