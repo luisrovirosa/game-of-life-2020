@@ -20,9 +20,7 @@ class World
     {
         $worldBuilder = new WorldBuilder();
         $originalCell = $this->cells[1][1];
-        $numberOfNeighbors = $this->numberOfNeighbors();
-        $cell = $originalCell->nextGeneration($numberOfNeighbors);
-
+        $cell = $originalCell->nextGeneration($this->numberOfNeighbors());
         $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();
