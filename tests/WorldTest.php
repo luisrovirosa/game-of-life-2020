@@ -13,7 +13,7 @@ class WorldTest extends TestCase
     /** @test */
     public function dies_when_no_neighbors(): void
     {
-        $world = new World($this->cellsWithNeighborsAlive([]));
+        $world = new World($this->xxx([]));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -27,7 +27,7 @@ class WorldTest extends TestCase
      */
     public function dies_when_one_neighbors(array $cells): void
     {
-        $world = new World($this->cellsWithNeighborsAlive($cells));
+        $world = new World($this->xxx($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -55,7 +55,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_2_neighbors(array $cells): void
     {
-        $world = new World($this->cellsWithNeighborsAlive($cells));
+        $world = new World($this->xxx($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -81,7 +81,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_3_neighbors(array $cells): void
     {
-        $world = new World($this->cellsWithNeighborsAlive($cells));
+        $world = new World($this->xxx($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -107,7 +107,7 @@ class WorldTest extends TestCase
      */
     public function dies_when_more_than_3_neighbors(array $cells): void
     {
-        $world = new World($this->cellsWithNeighborsAlive($cells));
+        $world = new World($this->xxx($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -126,11 +126,21 @@ class WorldTest extends TestCase
         ];
     }
 
-    protected function cellsWithNeighborsAlive(array $neighbors): array
+    protected function xxx(array $neighbors): array
     {
-        $cellsBuilder = (new CellsBuilder())->aliveAt(1, 1);
+        $cellsBuilder = $this->builderWithCellsAlive($neighbors);
+        $cellsBuilder->aliveAt(1, 1);
+
+        $cells = $cellsBuilder->build();
+
+        return $cells;
+    }
+
+    protected function builderWithCellsAlive(array $neighbors): CellsBuilder
+    {
+        $cellsBuilder = new CellsBuilder();
         array_map(fn(array $neighbor) => $cellsBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
 
-        return $cellsBuilder->build();
+        return $cellsBuilder;
     }
 }
