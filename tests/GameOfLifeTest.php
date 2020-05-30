@@ -19,6 +19,6 @@ class GameOfLifeTest extends TestCase
 
         $gameOfLife->run();
 
-        $this->assertEquals("...\n...\n...\n", $gameOfLife->toString());
+        $this->assertEquals("...\n...\n...", $gameOfLife->toString());
     }
 }

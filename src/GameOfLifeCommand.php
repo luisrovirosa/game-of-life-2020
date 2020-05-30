@@ -53,6 +53,6 @@ class GameOfLifeCommand extends Command
     protected function printGameOfLife(string $header, GameOfLife $gameOfLife, OutputInterface $output): void
     {
         $output->writeln($header);
-        $output->write($gameOfLife->toString());
+        $output->writeln($gameOfLife->toString());
     }
 }
