@@ -20,12 +20,14 @@ class World
     {
         $worldBuilder = new WorldBuilder();
         $numberOfNeighbors = $this->numberOfNeighbors();
+        $cell = new Cell('.');
         if ($this->isAlive(1, 1) && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
-            $worldBuilder->setCell(1, 1, new Cell('*'));
+            $cell = new Cell('*');
         }
         if (!$this->isAlive(1, 1) && $numberOfNeighbors === 3) {
-            $worldBuilder->setCell(1, 1, new Cell('*'));
+            $cell = new Cell('*');
         }
+        $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();
     }
