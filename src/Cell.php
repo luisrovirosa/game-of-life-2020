@@ -8,7 +8,7 @@ class Cell
 {
     private bool $isAlive;
 
-    public function __construct(bool $isAlive)
+    private function __construct(bool $isAlive)
     {
         $this->isAlive = $isAlive;
     }
