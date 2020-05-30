@@ -25,6 +25,7 @@ class GameOfLifeCommand extends Command
 
         $numberOfGenerations = (int) $input->getOption('generations');
         for ($currentGeneration = 0; $currentGeneration < $numberOfGenerations; $currentGeneration++) {
+            $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
             $gameOfLife->print($output);
         }

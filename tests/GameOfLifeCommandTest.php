@@ -11,7 +11,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 class GameOfLifeCommandTest extends TestCase
 {
     private const EXTRA_LINE = 1;
-    private const LINES_PER_ITERATION = 3;
+    private const WORLD_SIZE = 3;
+    private const HEADER_PER_GENERATION = 2;
+    private const LINES_PER_ITERATION = self::WORLD_SIZE + self::HEADER_PER_GENERATION;
 
     /** @test */
     public function does_not_fail_when_run(): void
