@@ -9,10 +9,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class World
 {
     private array $cells;
+    private array $realCells;
 
     public function __construct(array $cells)
     {
         $this->cells = $cells;
+        $this->realCells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $cells);
     }
 
     public function nextGeneration(): World
