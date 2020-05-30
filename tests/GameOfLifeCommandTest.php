@@ -6,17 +6,16 @@ namespace Katas\Tests;
 
 use Katas\GameOfLifeCommand;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class GameOfLifeCommandTest extends TestCase
 {
     /** @test */
     public function does_not_fail_when_run(): void
     {
-        $command = new GameOfLifeCommand();
+        $command = new CommandTester(new GameOfLifeCommand());
 
-        $exitNumber = $command->run(new StringInput(''), new NullOutput());
+        $exitNumber = $command->execute([]);
 
         $this->assertEquals(0, $exitNumber);
     }
