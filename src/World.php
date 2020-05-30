@@ -21,10 +21,10 @@ class World
     {
         $cellsBuilder = new CellsBuilder();
         $numberOfNeighbors = $this->numberOfNeighbors();
-        if ($this->at(1, 1) === '*' && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
+        if ($this->isAlive(1, 1) && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
             $cellsBuilder->aliveAt(1, 1);
         }
-        if ($this->at(1, 1) === '.' && $numberOfNeighbors === 3) {
+        if (!$this->isAlive(1, 1) && $numberOfNeighbors === 3) {
             $cellsBuilder->aliveAt(1, 1);
         }
 
@@ -43,9 +43,14 @@ class World
         return $this->cells[$row][$col];
     }
 
+    public function isAlive(int $row, int $col): bool
+    {
+        return $this->at($row, $col) === '*';
+    }
+
     protected function numberOfNeighbors(): int
     {
-        return count(array_filter($this->neighbors(), fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
+        return count(array_filter($this->neighbors(), fn($coordinated): bool => $this->isAlive($coordinated['row'], $coordinated['col'])));
     }
 
     protected function neighbors(): array

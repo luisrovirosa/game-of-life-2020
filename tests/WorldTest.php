@@ -23,7 +23,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('.', $nextGeneration->at(1, 1));
+        $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
     /**
@@ -38,7 +38,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('*', $nextGeneration->at(1, 1));
+        $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
     /**
@@ -53,7 +53,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('*', $nextGeneration->at(1, 1));
+        $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
     /**
@@ -68,7 +68,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('.', $nextGeneration->at(1, 1));
+        $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
     /**
@@ -86,7 +86,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('.', $nextGeneration->at(1, 1));
+        $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
     /**
@@ -101,7 +101,7 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals('*', $nextGeneration->at(1, 1));
+        $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
     public function noAliveNeighbor(): array
