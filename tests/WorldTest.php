@@ -37,7 +37,7 @@ class WorldTest extends TestCase
     public function oneNeighbor(): array
     {
         return [
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 0)->build()],
+            [$this->cellsWithNeighborsAlive([[0, 0]])],
             [$this->cellsWithCentralCellAlive()->aliveAt(0, 1)->build()],
             [$this->cellsWithCentralCellAlive()->aliveAt(0, 2)->build()],
             [$this->cellsWithCentralCellAlive()->aliveAt(1, 0)->build()],
@@ -103,5 +103,10 @@ class WorldTest extends TestCase
     protected function cellsWithCentralCellAlive(): CellsBuilder
     {
         return (new CellsBuilder())->aliveAt(1, 1);
+    }
+
+    protected function cellsWithNeighborsAlive(array $neighbors): array
+    {
+        return $this->cellsWithCentralCellAlive()->aliveAt($neighbors[0][0], $neighbors[0][1])->build();
     }
 }
