@@ -28,10 +28,12 @@ class World
 
     public function print(OutputInterface $output): void
     {
+        $toString = '';
         foreach ($this->cells as $row) {
             $stringRow = array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString());
-            $output->writeln($stringRow);
+            $toString .= $stringRow . PHP_EOL;
         }
+        $output->write($toString);
     }
 
     public function isAlive(int $row, int $col): bool

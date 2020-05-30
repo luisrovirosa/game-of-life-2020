@@ -4,7 +4,6 @@ namespace Katas\Tests;
 
 use Katas\GameOfLife;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -25,10 +24,7 @@ class GameOfLifeTest extends TestCase
 
         $gameOfLife->print($output->reveal());
 
-        $output->writeln(Argument::any())->shouldHaveBeenCalledTimes(3);
-        $output->writeln('*..')->shouldHaveBeenCalled();
-        $output->writeln('.*.')->shouldHaveBeenCalled();
-        $output->writeln('..*')->shouldHaveBeenCalled();
+        $output->write("*..\n.*.\n..*\n")->shouldHaveBeenCalledOnce();
     }
 
     /** @test */
@@ -45,6 +41,6 @@ class GameOfLifeTest extends TestCase
         $gameOfLife->run();
 
         $gameOfLife->print($output->reveal());
-        $output->writeln('...')->shouldHaveBeenCalledTimes(3);
+        $output->write("...\n...\n...\n")->shouldHaveBeenCalledOnce();
     }
 }
