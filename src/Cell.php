@@ -20,15 +20,14 @@ class Cell
 
     public function nextGeneration(int $numberOfNeighbors): Cell
     {
-        $cell = new Cell('.');
         if ($this->isAlive() && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
-            $cell = new Cell('*');
+            return new Cell('*');
         }
         if (!$this->isAlive() && $numberOfNeighbors === 3) {
-            $cell = new Cell('*');
+            return new Cell('*');
         }
 
-        return $cell;
+        return new Cell('.');
     }
 
     public function toString(): string
