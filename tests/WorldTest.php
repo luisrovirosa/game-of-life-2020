@@ -100,6 +100,32 @@ class WorldTest extends TestCase
         ];
     }
 
+    /**
+     * @test
+     * @dataProvider moreThanThreeAliveNeighbors
+     * @param array $cells
+     */
+    public function dies_when_more_than_3_neighbors(array $cells): void
+    {
+        $world = new World($this->cellsWithNeighborsAlive($cells));
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals('.', $nextGeneration->at(1, 1));
+    }
+
+    public function moreThanThreeAliveNeighbors(): array
+    {
+        return [
+            [[[0, 0], [0, 1], [0, 2], [1, 2]]],
+            [[[0, 0], [0, 2], [1, 2], [2, 2]]],
+            [[[0, 0], [1, 0], [1, 2], [2, 2]]],
+            [[[0, 1], [0, 2], [1, 0], [1, 2]]],
+            [[[0, 1], [1, 0], [2, 0], [2, 1]]],
+            [[[0, 2], [2, 0], [2, 1], [2, 2]]],
+        ];
+    }
+
     protected function cellsWithNeighborsAlive(array $neighbors): array
     {
         $cellsBuilder = (new CellsBuilder())->aliveAt(1, 1);
