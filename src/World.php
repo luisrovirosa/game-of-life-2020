@@ -53,6 +53,8 @@ class World
             ['row' => 0, 'col' => 2],
             ['row' => 1, 'col' => 0],
             ['row' => 1, 'col' => 2],
+            ['row' => 2, 'col' => 0],
+            ['row' => 2, 'col' => 1],
         ];
         foreach ($neighbors as $coordinated) {
             $count += $this->at($coordinated['row'], $coordinated['col']) === '*' ? 1 : 0;
