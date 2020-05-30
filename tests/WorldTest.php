@@ -23,6 +23,20 @@ class WorldTest extends TestCase
         $this->assertEquals('.', $nextGeneration->at(1, 1));
     }
 
+    /** @test */
+    public function dies_when_one_neighbors(): void
+    {
+        $world = new World([
+            ['*', '.', '.'],
+            ['.', '*', '.'],
+            ['.', '.', '.'],
+        ]);
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals('.', $nextGeneration->at(1, 1));
+    }
+
     /**
      * @test
      * @dataProvider twoNeighbors
