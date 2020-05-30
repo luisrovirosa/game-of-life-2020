@@ -13,7 +13,7 @@ class WorldTest extends TestCase
     /** @test */
     public function dies_when_no_neighbors(): void
     {
-        $world = new World($this->cellsWithCentralCellAlive()->build());
+        $world = new World($this->cellsWithNeighborsAlive([]));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -65,12 +65,12 @@ class WorldTest extends TestCase
     public function twoNeighbors(): array
     {
         return [
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 0)->aliveAt(0, 1)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 1)->aliveAt(0, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 0)->aliveAt(0, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(1, 0)->aliveAt(1, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 0)->aliveAt(2, 1)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 0)->aliveAt(2, 2)->build()],
+            [$this->cellsWithNeighborsAlive([[0, 0], [0, 1]])],
+            [$this->cellsWithNeighborsAlive([[0, 1], [0, 2]])],
+            [$this->cellsWithNeighborsAlive([[0, 0], [0, 2]])],
+            [$this->cellsWithNeighborsAlive([[1, 0], [1, 2]])],
+            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1]])],
+            [$this->cellsWithNeighborsAlive([[2, 0], [2, 2]])],
         ];
     }
 
@@ -91,12 +91,12 @@ class WorldTest extends TestCase
     public function threeNeighbors(): array
     {
         return [
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 0)->aliveAt(0, 1)->aliveAt(0, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 1)->aliveAt(0, 2)->aliveAt(1, 0)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 0)->aliveAt(0, 2)->aliveAt(1, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(1, 0)->aliveAt(1, 2)->aliveAt(0, 0)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 0)->aliveAt(2, 1)->aliveAt(1, 1)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 0)->aliveAt(2, 2)->aliveAt(2, 1)->build()],
+            [$this->cellsWithNeighborsAlive([[0, 0], [0, 1], [0, 2]])],
+            [$this->cellsWithNeighborsAlive([[0, 1], [0, 2], [1, 0]])],
+            [$this->cellsWithNeighborsAlive([[0, 0], [0, 2], [1, 2]])],
+            [$this->cellsWithNeighborsAlive([[1, 0], [1, 2], [0, 0]])],
+            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1], [1, 1]])],
+            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1], [2, 2]])],
         ];
     }
 
