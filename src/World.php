@@ -46,7 +46,6 @@ class World
 
     protected function hasTwoNeighbors(): bool
     {
-        $count = 0;
         $neighbors = [
             ['row' => 0, 'col' => 0],
             ['row' => 0, 'col' => 1],
@@ -57,9 +56,7 @@ class World
             ['row' => 2, 'col' => 1],
             ['row' => 2, 'col' => 2],
         ];
-        foreach ($neighbors as $coordinated) {
-            $count += $this->at($coordinated['row'], $coordinated['col']) === '*' ? 1 : 0;
-        }
+        $count = count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
 
         return ($count === 2);
     }
