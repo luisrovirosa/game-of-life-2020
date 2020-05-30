@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Katas;
 
-use Katas\Tests\CellsBuilder;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class World

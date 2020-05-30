@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Katas\Tests;
 
+use Katas\CellsBuilder;
 use Katas\World;
 use PHPUnit\Framework\TestCase;
 
