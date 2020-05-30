@@ -9,11 +9,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class World
 {
     /** @var Cell[][] */
-    private array $realCells;
+    private array $cells;
 
     public function __construct(array $cells)
     {
-        $this->realCells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $cells);
+        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $cells);
     }
 
     public function nextGeneration(): World
@@ -32,7 +32,7 @@ class World
 
     public function print(OutputInterface $output): void
     {
-        foreach ($this->realCells as $row) {
+        foreach ($this->cells as $row) {
             $stringRow = array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString());
             $output->writeln($stringRow);
         }
@@ -40,7 +40,7 @@ class World
 
     public function isAlive(int $row, int $col): bool
     {
-        return $this->realCells[$row][$col]->isAlive();
+        return $this->cells[$row][$col]->isAlive();
     }
 
     protected function numberOfNeighbors(): int
