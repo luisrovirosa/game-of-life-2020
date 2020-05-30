@@ -17,7 +17,8 @@ class World
 
     public function nextGeneration(): World
     {
-        if ($this->numberOfNeighbors() === 2) {
+        $numberOfNeighbors = $this->numberOfNeighbors();
+        if ($numberOfNeighbors === 2 || $numberOfNeighbors === 3) {
             return new World([
                 ['.', '.', '.'],
                 ['.', '*', '.'],
