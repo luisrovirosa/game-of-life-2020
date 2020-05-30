@@ -12,11 +12,7 @@ class WorldTest extends TestCase
     /** @test */
     public function dies_when_no_neighbors(): void
     {
-        $world = new World([
-            ['.', '.', '.'],
-            ['.', '*', '.'],
-            ['.', '.', '.'],
-        ]);
+        $world = new World($this->cellsBuilder()->build());
 
         $nextGeneration = $world->nextGeneration();
 
@@ -40,27 +36,9 @@ class WorldTest extends TestCase
     public function oneNeighbor(): array
     {
         return [
-            [
-                [
-                    ['*', '.', '.'],
-                    ['.', '*', '.'],
-                    ['.', '.', '.'],
-                ],
-            ],
-            [
-                [
-                    ['.', '*', '.'],
-                    ['.', '*', '.'],
-                    ['.', '.', '.'],
-                ],
-            ],
-            [
-                [
-                    ['.', '.', '*'],
-                    ['.', '*', '.'],
-                    ['.', '.', '.'],
-                ],
-            ],
+            [$this->cellsBuilder()->aliveAt(0, 0)->build()],
+            [$this->cellsBuilder()->aliveAt(0, 1)->build()],
+            [$this->cellsBuilder()->aliveAt(0, 2)->build()],
         ];
     }
 
@@ -80,26 +58,15 @@ class WorldTest extends TestCase
 
     public function twoNeighbors(): array
     {
-        $cells = (new CellsBuilder())->aliveAt(0, 0)->aliveAt(0, 1)->build();
-
         return [
-            [
-                $cells,
-            ],
-            [
-                [
-                    ['.', '*', '*'],
-                    ['.', '*', '.'],
-                    ['.', '.', '.'],
-                ],
-            ],
-            [
-                [
-                    ['.', '.', '.'],
-                    ['*', '*', '*'],
-                    ['.', '.', '.'],
-                ],
-            ],
+            [$this->cellsBuilder()->aliveAt(0, 0)->aliveAt(0, 1)->build()],
+            [$this->cellsBuilder()->aliveAt(0, 1)->aliveAt(0, 2)->build()],
+            [$this->cellsBuilder()->aliveAt(1, 0)->aliveAt(1, 2)->build()],
         ];
+    }
+
+    protected function cellsBuilder(): CellsBuilder
+    {
+        return new CellsBuilder();
     }
 }
