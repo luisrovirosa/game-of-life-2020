@@ -6,12 +6,10 @@ namespace Katas;
 
 class Cell
 {
-    private string $state;
     private bool $isAlive;
 
-    public function __construct(string $state, bool $isAlive)
+    public function __construct(bool $isAlive)
     {
-        $this->state = $state;
         $this->isAlive = $isAlive;
     }
 
@@ -44,11 +42,11 @@ class Cell
 
     public static function alive(): Cell
     {
-        return new Cell('*', true);
+        return new Cell(true);
     }
 
     public static function dead(): Cell
     {
-        return new Cell('.', false);
+        return new Cell(false);
     }
 }
