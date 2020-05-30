@@ -31,9 +31,9 @@ class NeighborFinderTest extends TestCase
     public function scenarios(): array
     {
         return [
-            'at position 1,1 without neighbors' => [1, 1, [], 0],
-            'at position 1,1 with one neighbor' => [1, 1, [[0, 0]], 1],
-            'at position 0,0 with one neighbor' => [0, 0, [[1, 1]], 1],
+            'at center without neighbors does not find any neighbor' => [1, 1, [], 0],
+            'at center with one neighbor detects the neighbor' => [1, 1, [[0, 0]], 1],
+            'at position 0,0 with one neighbor detects the neighbor' => [0, 0, [[1, 1]], 1],
         ];
     }
 }
