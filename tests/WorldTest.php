@@ -23,17 +23,29 @@ class WorldTest extends TestCase
         $this->assertEquals('.', $nextGeneration->at(1, 1));
     }
 
-    /** @test */
-    public function survives_when_2_neighbors(): void
+    /**
+     * @test
+     * @dataProvider twoNeighbors
+     */
+    public function survives_when_2_neighbors($cells): void
     {
-        $world = new World([
-            ['*', '*', '.'],
-            ['.', '*', '.'],
-            ['.', '.', '.'],
-        ]);
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
         $this->assertEquals('*', $nextGeneration->at(1, 1));
+    }
+
+    public function twoNeighbors(): array
+    {
+        return [
+            [
+                [
+                    ['*', '*', '.'],
+                    ['.', '*', '.'],
+                    ['.', '.', '.'],
+                ],
+            ],
+        ];
     }
 }
