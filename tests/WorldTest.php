@@ -38,13 +38,13 @@ class WorldTest extends TestCase
     {
         return [
             [$this->cellsWithNeighborsAlive([[0, 0]])],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 1)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(0, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(1, 0)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(1, 2)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 0)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 1)->build()],
-            [$this->cellsWithCentralCellAlive()->aliveAt(2, 2)->build()],
+            [$this->cellsWithNeighborsAlive([[0, 1]])],
+            [$this->cellsWithNeighborsAlive([[0, 2]])],
+            [$this->cellsWithNeighborsAlive([[1, 0]])],
+            [$this->cellsWithNeighborsAlive([[1, 2]])],
+            [$this->cellsWithNeighborsAlive([[2, 0]])],
+            [$this->cellsWithNeighborsAlive([[2, 1]])],
+            [$this->cellsWithNeighborsAlive([[2, 2]])],
         ];
     }
 
