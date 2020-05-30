@@ -28,10 +28,17 @@ class GameOfLifeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $gameOfLife = new GameOfLife([]);
+        $gameOfLife = new GameOfLife([
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+        ]);
+
+        $output->writeln("\nGeneration Initial");
+        $gameOfLife->print($output);
 
         $numberOfGenerations = (int) $input->getOption('generations');
-        for ($currentGeneration = 0; $currentGeneration < $numberOfGenerations; $currentGeneration++) {
+        for ($currentGeneration = 1; $currentGeneration <= $numberOfGenerations; $currentGeneration++) {
             $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
             $gameOfLife->print($output);

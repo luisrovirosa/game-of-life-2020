@@ -39,19 +39,28 @@ class GameOfLifeCommandTest extends TestCase
     }
 
     /** @test */
+    public function prints_initial_world(): void
+    {
+        $this->command->execute(['--generations' => 0]);
+
+        $output = $this->command->getDisplay(true);
+        $this->assertCount(self::LINES_PER_ITERATION + self::EXTRA_LINE, explode("\n", $output));
+    }
+
+    /** @test */
     public function a_number_of_generations_can_be_specified(): void
     {
         $this->command->execute(['--generations' => 10]);
 
         $output = $this->command->getDisplay(true);
-        $this->assertCount(self::LINES_PER_ITERATION * 10 + self::EXTRA_LINE, explode("\n", $output));
+        $this->assertCount(self::LINES_PER_ITERATION * (10 + 1) + self::EXTRA_LINE, explode("\n", $output));
     }
 
     /** @test */
     public function waits_1_second_after_every_generation(): void
     {
         $numberOfGenerations = 2;
-        
+
         $this->command->execute(['--generations' => $numberOfGenerations]);
 
         $this->clock->wait(self::ONE_SECOND_IN_MILISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
