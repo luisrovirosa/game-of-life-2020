@@ -31,7 +31,7 @@ class World
 
     protected function numberOfNeighbors(): int
     {
-        return count(array_filter($this->neighbors(), fn($coordinated): bool => $this->isAlive($coordinated['row'], $coordinated['col'])));
+        return count(array_filter($this->neighbors(), fn($coordinated): bool => $this->cells[$coordinated['row']][$coordinated['col']]->isAlive()));
     }
 
     protected function neighbors(): array
