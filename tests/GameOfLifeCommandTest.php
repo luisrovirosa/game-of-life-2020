@@ -48,6 +48,14 @@ class GameOfLifeCommandTest extends TestCase
     }
 
     /** @test */
+    public function initial_world_can_be_defined(): void
+    {
+        $this->command->execute(['world' => '*** *** ***']);
+
+        $this->assertStringContainsString("***\n***\n***", $this->output());
+    }
+
+    /** @test */
     public function a_number_of_generations_can_be_specified(): void
     {
         $numberOfGenerations = 10;
@@ -73,7 +81,11 @@ class GameOfLifeCommandTest extends TestCase
 
     private function assertPrintsGenerations(int $numberOfGenerations): void
     {
-        $output = $this->command->getDisplay(true);
-        $this->assertCount(self::LINES_PER_ITERATION * ($numberOfGenerations + self::INITIAL_WORLD) + self::EXTRA_LINE, explode("\n", $output));
+        $this->assertCount(self::LINES_PER_ITERATION * ($numberOfGenerations + self::INITIAL_WORLD) + self::EXTRA_LINE, explode("\n", $this->output()));
+    }
+
+    private function output(): string
+    {
+        return $this->command->getDisplay();
     }
 }
