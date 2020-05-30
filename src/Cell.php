@@ -7,10 +7,12 @@ namespace Katas;
 class Cell
 {
     private string $state;
+    private bool $isAlive;
 
-    public function __construct(string $state)
+    public function __construct(string $state, bool $isAlive)
     {
         $this->state = $state;
+        $this->isAlive = $isAlive;
     }
 
     public function nextGeneration(int $numberOfNeighbors): Cell
@@ -27,7 +29,7 @@ class Cell
 
     public function isAlive(): bool
     {
-        return $this->state === '*';
+        return $this->isAlive;
     }
 
     public function isDead(): bool
@@ -37,16 +39,16 @@ class Cell
 
     public function toString(): string
     {
-        return $this->state;
+        return $this->isAlive ? '*' : '.';
     }
 
     public static function alive(): Cell
     {
-        return new Cell('*');
+        return new Cell('*', true);
     }
 
     public static function dead(): Cell
     {
-        return new Cell('.');
+        return new Cell('.', false);
     }
 }
