@@ -21,7 +21,9 @@ class World
         $numberOfNeighbors = $this->numberOfNeighbors();
         $cellsBuilder = new CellsBuilder();
         if ($numberOfNeighbors === 2 || $numberOfNeighbors === 3) {
-            return new World(($cellsBuilder)->aliveAt(1, 1)->build());
+            $cellsBuilder->aliveAt(1, 1);
+
+            return new World($cellsBuilder->build());
         }
 
         return new World(($cellsBuilder)->build());
