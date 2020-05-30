@@ -14,7 +14,14 @@ class NeighborFinder
         $this->cells = $cells;
     }
 
-    public function find(int $row, int $col): array
+    public function numberOfNeighbors(int $row, int $col): int
+    {
+        $isAliveFilter = fn($neighborPosition): bool => $this->cells[$neighborPosition['row']][$neighborPosition['col']]->isAlive();
+
+        return count(array_filter($this->find($row, $col), $isAliveFilter));
+    }
+
+    private function find(int $row, int $col): array
     {
         return [
             ['row' => 0, 'col' => 0],
