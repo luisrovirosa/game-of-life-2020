@@ -18,7 +18,8 @@ class GameOfLifeCommandTest extends TestCase
     private const WORLD_SIZE = 3;
     private const HEADER_PER_GENERATION = 2;
     private const LINES_PER_ITERATION = self::WORLD_SIZE + self::HEADER_PER_GENERATION;
-    const ONE_SECOND_IN_MILISECONDS = 1000;
+    private const ONE_SECOND_IN_MILLISECONDS = 1000;
+    private const INITIAL_WORLD = 1;
     private CommandTester $command;
     private $clock;
 
@@ -43,17 +44,16 @@ class GameOfLifeCommandTest extends TestCase
     {
         $this->command->execute(['--generations' => 0]);
 
-        $output = $this->command->getDisplay(true);
-        $this->assertCount(self::LINES_PER_ITERATION + self::EXTRA_LINE, explode("\n", $output));
+        $this->assertPrintsOnlyInitialWorld();
     }
 
     /** @test */
     public function a_number_of_generations_can_be_specified(): void
     {
-        $this->command->execute(['--generations' => 10]);
+        $numberOfGenerations = 10;
+        $this->command->execute(['--generations' => $numberOfGenerations]);
 
-        $output = $this->command->getDisplay(true);
-        $this->assertCount(self::LINES_PER_ITERATION * (10 + 1) + self::EXTRA_LINE, explode("\n", $output));
+        $this->assertPrintsGenerations($numberOfGenerations);
     }
 
     /** @test */
@@ -63,6 +63,17 @@ class GameOfLifeCommandTest extends TestCase
 
         $this->command->execute(['--generations' => $numberOfGenerations]);
 
-        $this->clock->wait(self::ONE_SECOND_IN_MILISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
+        $this->clock->wait(self::ONE_SECOND_IN_MILLISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
+    }
+
+    private function assertPrintsOnlyInitialWorld(): void
+    {
+        $this->assertPrintsGenerations(0);
+    }
+
+    private function assertPrintsGenerations(int $numberOfGenerations): void
+    {
+        $output = $this->command->getDisplay(true);
+        $this->assertCount(self::LINES_PER_ITERATION * ($numberOfGenerations + self::INITIAL_WORLD) + self::EXTRA_LINE, explode("\n", $output));
     }
 }
