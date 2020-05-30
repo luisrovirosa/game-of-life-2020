@@ -10,14 +10,24 @@ use PHPUnit\Framework\TestCase;
 
 class NeighborFinderTest extends TestCase
 {
-    /** @test */
-    public function find_the_number_of_alive_neighbors(): void
+    /**
+     * @test
+     * @dataProvider scenarios
+     */
+    public function find_the_number_of_alive_neighbors(int $row, int $col, array $aliveNeighbors): void
     {
-        $cells = (new CellsBuilder())->build();
+        $cells = (new CellsBuilder())->withAliveCells($aliveNeighbors)->build();
         $finder = new NeighborFinder($cells);
 
-        $numberOfAliveNeighbors = $finder->numberOfAliveNeighbors(1, 1);
+        $numberOfAliveNeighbors = $finder->numberOfAliveNeighbors($row, $col);
 
         $this->assertEquals(0, $numberOfAliveNeighbors);
+    }
+
+    public function scenarios(): array
+    {
+        return [
+            'at position 1,1 without neighbors' => [1, 1, []],
+        ];
     }
 }
