@@ -22,6 +22,15 @@ class NeighborFinder
 
     private function areNeighbors(int $row, int $col, int $rowNeighbor, int $colNeighbor): bool
     {
-        return !($rowNeighbor === $row && $colNeighbor === $col);
+        if ($this->isThemselves($rowNeighbor, $row, $colNeighbor, $col)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function isThemselves(int $rowNeighbor, int $row, int $colNeighbor, int $col): bool
+    {
+        return ($rowNeighbor === $row && $colNeighbor === $col);
     }
 }
