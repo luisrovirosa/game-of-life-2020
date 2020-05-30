@@ -18,22 +18,20 @@ class NeighborFinderTest extends TestCase
      * @param array $aliveNeighbors
      * @param $expectedNeighbors
      */
-    public function find_the_number_of_alive_neighbors(int $row, int $col, array $aliveNeighbors, $expectedNeighbors): void
+    public function find_the_number_of_alive_neighbors(int $row, int $col, $expectedNumberOfNeighbors): void
     {
-        $cells = (new CellsBuilder())->withAliveCells($aliveNeighbors)->build();
+        $cells = (new CellsBuilder())->build();
         $finder = new NeighborFinder($cells);
 
-        $numberOfAliveNeighbors = $finder->numberOfAliveNeighbors($row, $col);
+        $numberOfAliveNeighbors = $finder->find($row, $col);
 
-        $this->assertEquals($expectedNeighbors, $numberOfAliveNeighbors);
+        $this->assertCount($expectedNumberOfNeighbors, $numberOfAliveNeighbors);
     }
 
     public function scenarios(): array
     {
         return [
-            'at center without neighbors does not find any neighbor' => [1, 1, [], 0],
-            'at center with one neighbor detects the neighbor' => [1, 1, [[0, 0]], 1],
-            'at position 0,0 with one neighbor detects the neighbor' => [0, 0, [[1, 1]], 1],
+            'at center' => [1, 1, 8],
         ];
     }
 }

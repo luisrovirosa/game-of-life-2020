@@ -14,25 +14,22 @@ class NeighborFinder
         $this->cells = $cells;
     }
 
-    public function numberOfAliveNeighbors(int $row, int $col): int
-    {
-        $isAliveFilter = fn($neighborPosition): bool => $this->cells[$neighborPosition['row']][$neighborPosition['col']]->isAlive();
-
-        return count(array_filter($this->find($row, $col), $isAliveFilter));
-    }
-
-    private function find(int $row, int $col): array
+    public function find(int $row, int $col): array
     {
         $neighbors = [];
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
-                $isNotThemselves = !($i === $row && $j === $col);
-                if ($isNotThemselves) {
+                if ($this->areNeighbors($row, $col, $i, $j)) {
                     $neighbors[] = ['row' => $i, 'col' => $j];
                 }
             }
         }
 
         return $neighbors;
+    }
+
+    private function areNeighbors(int $row, int $col, int $rowNeighbor, int $colNeighbor): bool
+    {
+        return !($rowNeighbor === $row && $colNeighbor === $col);
     }
 }

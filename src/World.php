@@ -20,7 +20,7 @@ class World
     {
         $worldBuilder = new WorldBuilder();
         $originalCell = $this->cells[1][1];
-        $cell = $originalCell->nextGeneration($this->neighborFinder->numberOfAliveNeighbors(1, 1));
+        $cell = $originalCell->nextGeneration($this->numberOfAliveNeighbors(1, 1));
         $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();
@@ -37,5 +37,12 @@ class World
         $rowOfCellsToStringMapper = fn(array $row): string => array_reduce($row, $cellsToStringReducer);
 
         return implode(PHP_EOL, array_map($rowOfCellsToStringMapper, $this->cells));
+    }
+
+    public function numberOfAliveNeighbors(int $row, int $col): int
+    {
+        $isAliveFilter = fn($neighborPosition): bool => $this->cells[$neighborPosition['row']][$neighborPosition['col']]->isAlive();
+
+        return count(array_filter($this->neighborFinder->find($row, $col), $isAliveFilter));
     }
 }
