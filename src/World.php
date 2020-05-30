@@ -50,6 +50,9 @@ class World
 
     public function toString(): string
     {
-        return implode(PHP_EOL, array_map(fn(array $row): string => array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString()), $this->cells));
+        $cellsToStringReducer = fn(?string $carry, Cell $cell): string => $carry . $cell->toString();
+        $rowOfCellsToStringMapper = fn(array $row): string => array_reduce($row, $cellsToStringReducer);
+
+        return implode(PHP_EOL, array_map($rowOfCellsToStringMapper, $this->cells));
     }
 }
