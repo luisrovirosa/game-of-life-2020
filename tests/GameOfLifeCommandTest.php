@@ -59,6 +59,7 @@ class GameOfLifeCommandTest extends TestCase
     public function a_number_of_generations_can_be_specified(): void
     {
         $numberOfGenerations = 10;
+        
         $this->command->execute(['--generations' => $numberOfGenerations]);
 
         $this->assertPrintsGenerations($numberOfGenerations);
@@ -77,9 +78,11 @@ class GameOfLifeCommandTest extends TestCase
     /** @test */
     public function the_time_between_generations_can_be_defined(): void
     {
-        $this->command->execute(['--time_between_generations' => 0]);
+        $timeBetweenGenerations = 0;
 
-        $this->clock->wait(0)->shouldHaveBeenCalled();
+        $this->command->execute(['--time_between_generations' => $timeBetweenGenerations]);
+
+        $this->clock->wait($timeBetweenGenerations)->shouldHaveBeenCalled();
     }
 
     private function assertPrintsOnlyInitialWorld(): void
