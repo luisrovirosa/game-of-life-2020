@@ -18,7 +18,7 @@ class World
 
     public function nextGeneration(): World
     {
-        $cellsBuilder = new CellsBuilder();
+        $cellsBuilder = new WorldBuilder();
         $numberOfNeighbors = $this->numberOfNeighbors();
         if ($this->isAlive(1, 1) && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
             $cellsBuilder->aliveAt(1, 1);
@@ -27,7 +27,7 @@ class World
             $cellsBuilder->aliveAt(1, 1);
         }
 
-        return new World(($cellsBuilder)->build());
+        return $cellsBuilder->build();
     }
 
     public function print(OutputInterface $output): void

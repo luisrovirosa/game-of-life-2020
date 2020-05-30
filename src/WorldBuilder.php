@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Katas;
 
-class CellsBuilder
+class WorldBuilder
 {
     private array $cells;
 
@@ -24,8 +24,8 @@ class CellsBuilder
         return $this;
     }
 
-    public function build(): array
+    public function build(): World
     {
-        return $this->cells;
+        return new World($this->cells);
     }
 }

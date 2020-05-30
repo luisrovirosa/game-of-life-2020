@@ -4,8 +4,7 @@ declare(strict_types = 1);
 
 namespace Katas\Tests;
 
-use Katas\CellsBuilder;
-use Katas\World;
+use Katas\WorldBuilder;
 use PHPUnit\Framework\TestCase;
 
 class WorldTest extends TestCase
@@ -18,8 +17,7 @@ class WorldTest extends TestCase
      */
     public function dies_by_underpopulation_when_is_alive_and_has_less_than_2_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -33,8 +31,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_is_alive_and_has_2_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -48,8 +45,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_is_alive_and_has_3_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -63,8 +59,7 @@ class WorldTest extends TestCase
      */
     public function dies_when_is_alive_and_has_more_than_3_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -81,8 +76,7 @@ class WorldTest extends TestCase
      */
     public function remains_dead_when_less_or_more_than_3_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -96,8 +90,7 @@ class WorldTest extends TestCase
      */
     public function reproduces_when_is_dead_and_has_3_neighbors(array $aliveCells): void
     {
-        $cells = $this->builderWithCellsAlive($aliveCells)->build();
-        $world = new World($cells);
+        $world = $this->builderWithCellsAlive($aliveCells)->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -165,9 +158,9 @@ class WorldTest extends TestCase
         ];
     }
 
-    protected function builderWithCellsAlive(array $neighbors): CellsBuilder
+    protected function builderWithCellsAlive(array $neighbors): WorldBuilder
     {
-        $cellsBuilder = new CellsBuilder();
+        $cellsBuilder = new WorldBuilder();
         array_map(fn(array $neighbor) => $cellsBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
 
         return $cellsBuilder;
