@@ -18,16 +18,16 @@ class World
 
     public function nextGeneration(): World
     {
-        $cellsBuilder = new WorldBuilder();
+        $worldBuilder = new WorldBuilder();
         $numberOfNeighbors = $this->numberOfNeighbors();
         if ($this->isAlive(1, 1) && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
-            $cellsBuilder->aliveAt(1, 1);
+            $worldBuilder->aliveAt(1, 1);
         }
         if (!$this->isAlive(1, 1) && $numberOfNeighbors === 3) {
-            $cellsBuilder->aliveAt(1, 1);
+            $worldBuilder->aliveAt(1, 1);
         }
 
-        return $cellsBuilder->build();
+        return $worldBuilder->build();
     }
 
     public function print(OutputInterface $output): void

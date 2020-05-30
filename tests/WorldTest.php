@@ -160,9 +160,9 @@ class WorldTest extends TestCase
 
     protected function builderWithCellsAlive(array $neighbors): WorldBuilder
     {
-        $cellsBuilder = new WorldBuilder();
-        array_map(fn(array $neighbor) => $cellsBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
+        $worldBuilder = new WorldBuilder();
+        array_map(fn(array $neighbor) => $worldBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
 
-        return $cellsBuilder;
+        return $worldBuilder;
     }
 }
