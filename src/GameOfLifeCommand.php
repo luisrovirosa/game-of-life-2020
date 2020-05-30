@@ -30,9 +30,7 @@ class GameOfLifeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $worldAsString = $input->getArgument('world');
-        $world = array_map(fn($file) => str_split($file), explode(' ', $worldAsString));
-        $gameOfLife = new GameOfLife($world);
+        $gameOfLife = new GameOfLife($this->initialWorld($input));
 
         $output->writeln("\nGeneration Initial");
         $gameOfLife->print($output);
@@ -46,5 +44,12 @@ class GameOfLifeCommand extends Command
         }
 
         return 0;
+    }
+
+    protected function initialWorld(InputInterface $input): array
+    {
+        $worldAsString = $input->getArgument('world');
+
+        return array_map(fn($file) => str_split($file), explode(' ', $worldAsString));
     }
 }
