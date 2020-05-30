@@ -12,6 +12,7 @@ class WorldTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider noAliveNeighbor
      * @dataProvider oneAliveNeighbor
      * @param array $aliveCells
      */
@@ -100,10 +101,16 @@ class WorldTest extends TestCase
         $this->assertEquals('*', $nextGeneration->at(1, 1));
     }
 
-    public function oneAliveNeighbor(): array
+    public function noAliveNeighbor(): array
     {
         return [
             'no neighbors' => [[]],
+        ];
+    }
+
+    public function oneAliveNeighbor(): array
+    {
+        return [
             'one neighbor at 0,0' => [[[0, 0]]],
             'one neighbor at 0,1' => [[[0, 1]]],
             'one neighbor at 0,2' => [[[0, 2]]],
