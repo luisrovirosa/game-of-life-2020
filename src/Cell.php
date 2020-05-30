@@ -39,4 +39,14 @@ class Cell
     {
         return $this->state;
     }
+
+    public static function alive(): Cell
+    {
+        return new Cell('*');
+    }
+
+    public static function dead(): Cell
+    {
+        return new Cell('.');
+    }
 }

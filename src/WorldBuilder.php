@@ -16,12 +16,12 @@ class WorldBuilder
                 ['.', '.', '.'],
                 ['.', '.', '.'],
             ];
-        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $stringCells);
+        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => $cell === '*' ? Cell::alive() : Cell::dead(), $row), $stringCells);
     }
 
     public function aliveAt(int $row, int $col): self
     {
-        $this->setCell($row, $col, new Cell('*'));
+        $this->setCell($row, $col, Cell::alive());
 
         return $this;
     }
