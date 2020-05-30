@@ -13,21 +13,26 @@ class Cell
         $this->state = $state;
     }
 
-    public function isAlive(): bool
-    {
-        return $this->state === '*';
-    }
-
     public function nextGeneration(int $numberOfNeighbors): Cell
     {
         if ($this->isAlive() && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
             return new Cell('*');
         }
-        if (!$this->isAlive() && $numberOfNeighbors === 3) {
+        if ($this->isDead() && $numberOfNeighbors === 3) {
             return new Cell('*');
         }
 
         return new Cell('.');
+    }
+
+    public function isAlive(): bool
+    {
+        return $this->state === '*';
+    }
+
+    public function isDead(): bool
+    {
+        return !$this->isAlive();
     }
 
     public function toString(): string
