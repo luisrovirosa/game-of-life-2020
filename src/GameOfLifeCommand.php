@@ -32,16 +32,12 @@ class GameOfLifeCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $gameOfLife = new GameOfLife($this->initialWorld($input));
-
-        $output->writeln("\nGeneration Initial");
-        $output->write($gameOfLife->toString());
-
+        $this->printGameOfLife("\nGeneration Initial", $gameOfLife, $output);
         $numberOfGenerations = (int) $input->getOption('generations');
         for ($currentGeneration = 1; $currentGeneration <= $numberOfGenerations; $currentGeneration++) {
             $this->clock->wait((int) $input->getOption('time_between_generations'));
-            $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
-            $output->write($gameOfLife->toString());
+            $this->printGameOfLife("\nGeneration $currentGeneration", $gameOfLife, $output);
         }
 
         return 0;
@@ -52,5 +48,11 @@ class GameOfLifeCommand extends Command
         $worldAsString = $input->getArgument('world');
 
         return array_map(fn($file) => str_split($file), explode(' ', $worldAsString));
+    }
+
+    protected function printGameOfLife(string $header, GameOfLife $gameOfLife, OutputInterface $output): void
+    {
+        $output->writeln($header);
+        $output->write($gameOfLife->toString());
     }
 }
