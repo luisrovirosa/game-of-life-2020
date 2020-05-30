@@ -73,7 +73,10 @@ class WorldTest extends TestCase
 
     /**
      * @test
-     * @dataProvider lessOrMoreThan3Neighbors
+     * @dataProvider noAliveNeighbor
+     * @dataProvider oneAliveNeighbor
+     * @dataProvider twoAliveNeighbors
+     * @dataProvider moreThanThreeAliveNeighbors
      * @param array $aliveCells
      */
     public function remains_dead_when_less_or_more_than_3_neighbors(array $aliveCells): void
@@ -125,58 +128,40 @@ class WorldTest extends TestCase
     public function twoAliveNeighbors(): array
     {
         return [
-            [[[0, 0], [0, 1]]],
-            [[[0, 1], [0, 2]]],
-            [[[0, 0], [0, 2]]],
-            [[[1, 0], [1, 2]]],
-            [[[2, 0], [2, 1]]],
-            [[[2, 0], [2, 2]]],
+            'two neighbor at 0,0 and 0,1' => [[[0, 0], [0, 1]]],
+            'two neighbor at 0,1 and 0,2' => [[[0, 1], [0, 2]]],
+            'two neighbor at 0,0 and 0,2' => [[[0, 0], [0, 2]]],
+            'two neighbor at 1,0 and 1,2' => [[[1, 0], [1, 2]]],
+            'two neighbor at 2,0 and 2,1' => [[[2, 0], [2, 1]]],
+            'two neighbor at 2,0 and 2,2' => [[[2, 0], [2, 2]]],
         ];
     }
 
     public function threeAliveNeighbors(): array
     {
         return [
-            [[[0, 0], [0, 1], [0, 2]]],
-            [[[0, 1], [0, 2], [1, 0]]],
-            [[[0, 0], [0, 2], [1, 2]]],
-            [[[1, 0], [1, 2], [0, 0]]],
-            [[[2, 0], [2, 1], [1, 0]]],
-            [[[2, 0], [2, 1], [2, 2]]],
+            'three neighbor at 0,0 and 0,1 and 0,2' => [[[0, 0], [0, 1], [0, 2]]],
+            'three neighbor at 0,1 and 0,2 and 1,0' => [[[0, 1], [0, 2], [1, 0]]],
+            'three neighbor at 0,0 and 0,2 and 1,2' => [[[0, 0], [0, 2], [1, 2]]],
+            'three neighbor at 1,0 and 1,2 and 0,0' => [[[1, 0], [1, 2], [0, 0]]],
+            'three neighbor at 2,0 and 2,1 and 1,0' => [[[2, 0], [2, 1], [1, 0]]],
+            'three neighbor at 2,0 and 2,1 and 2,2' => [[[2, 0], [2, 1], [2, 2]]],
         ];
     }
 
     public function moreThanThreeAliveNeighbors(): array
     {
         return [
-            [[[0, 0], [0, 1], [0, 2], [1, 2]]],
-            [[[0, 0], [0, 2], [1, 2], [2, 2]]],
-            [[[0, 0], [1, 0], [1, 2], [2, 2]]],
-            [[[0, 1], [0, 2], [1, 0], [1, 2]]],
-            [[[0, 1], [1, 0], [2, 0], [2, 1]]],
-            [[[0, 2], [2, 0], [2, 1], [2, 2]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]]],
-        ];
-    }
-
-    public function lessOrMoreThan3Neighbors(): array
-    {
-        return [
-            [[[0, 0]]],
-            [[[0, 2]]],
-            [[[0, 0], [1, 0]]],
-            [[[1, 0], [1, 2]]],
-            [[[2, 0], [2, 2]]],
-            [[[0, 1], [0, 2], [1, 0], [1, 2]]],
-            [[[0, 1], [1, 0], [2, 0], [2, 1]]],
-            [[[0, 2], [2, 0], [2, 1], [2, 2]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1]]],
-            [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]]],
+            'four neighbor at 0,0 and 0,1 and 0,2 and 1,2' => [[[0, 0], [0, 1], [0, 2], [1, 2]]],
+            'four neighbor at 0,0 and 0,2 and 1,2 and 2,2' => [[[0, 0], [0, 2], [1, 2], [2, 2]]],
+            'four neighbor at 0,0 and 1,0 and 1,2 and 2,2' => [[[0, 0], [1, 0], [1, 2], [2, 2]]],
+            'four neighbor at 0,1 and 0,2 and 1,0 and 1,2' => [[[0, 1], [0, 2], [1, 0], [1, 2]]],
+            'four neighbor at 0,1 and 1,0 and 2,0 and 2,1' => [[[0, 1], [1, 0], [2, 0], [2, 1]]],
+            'four neighbor at 0,2 and 2,0 and 2,1 and 2,2' => [[[0, 2], [2, 0], [2, 1], [2, 2]]],
+            'five neighbor at 0,0 and 0,1 and 0,2 and 1,0 and 1,2' => [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2]]],
+            'six neighbor at all except 2,1 and 2,2' => [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0]]],
+            'seven neighbor at all except 2,2' => [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1]]],
+            'eight neighbor' => [[[0, 0], [0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2]]],
         ];
     }
 
