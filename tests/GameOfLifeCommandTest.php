@@ -10,7 +10,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class GameOfLifeCommandTest extends TestCase
 {
-    const EXTRA_LINE = 1;
+    private const EXTRA_LINE = 1;
+    private const LINES_PER_ITERATION = 3;
 
     /** @test */
     public function does_not_fail_when_run(): void
@@ -30,6 +31,6 @@ class GameOfLifeCommandTest extends TestCase
         $command->execute(['--generations' => 10]);
 
         $output = $command->getDisplay(true);
-        $this->assertCount(3 * 10 + self::EXTRA_LINE, explode("\n", $output));
+        $this->assertCount(self::LINES_PER_ITERATION * 10 + self::EXTRA_LINE, explode("\n", $output));
     }
 }
