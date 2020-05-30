@@ -26,7 +26,8 @@ class NeighborFinder
         $neighbors = [];
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
-                if ($i !== $row || $j !== $col) {
+                $isNotThemselves = !($i === $row && $j === $col);
+                if ($isNotThemselves) {
                     $neighbors[] = ['row' => $i, 'col' => $j];
                 }
             }
