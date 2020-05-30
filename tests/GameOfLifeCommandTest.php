@@ -74,6 +74,14 @@ class GameOfLifeCommandTest extends TestCase
         $this->clock->wait(self::ONE_SECOND_IN_MILLISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
     }
 
+    /** @test */
+    public function the_time_between_generations_can_be_defined(): void
+    {
+        $this->command->execute(['--time_between_generations' => 0]);
+
+        $this->clock->wait(0)->shouldHaveBeenCalled();
+    }
+
     private function assertPrintsOnlyInitialWorld(): void
     {
         $this->assertPrintsGenerations(0);

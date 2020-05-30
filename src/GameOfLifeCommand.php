@@ -25,7 +25,8 @@ class GameOfLifeCommand extends Command
     {
         $this->setDescription('Runs the Game of life kata')
              ->addArgument('world', InputArgument::OPTIONAL, "The initial world as string", "... ... ...")
-             ->addOption('generations', 'g', InputOption::VALUE_OPTIONAL, 'The number of generations created', 10);
+             ->addOption('generations', 'g', InputOption::VALUE_OPTIONAL, 'The number of generations created', 10)
+             ->addOption('time_between_generations', 't', InputOption::VALUE_OPTIONAL, 'Time in milliseconds wait when printing generations', 1000);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -37,7 +38,7 @@ class GameOfLifeCommand extends Command
 
         $numberOfGenerations = (int) $input->getOption('generations');
         for ($currentGeneration = 1; $currentGeneration <= $numberOfGenerations; $currentGeneration++) {
-            $this->clock->wait(1000);
+            $this->clock->wait((int) $input->getOption('time_between_generations'));
             $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
             $gameOfLife->print($output);
