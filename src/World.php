@@ -50,8 +50,8 @@ class World
         $count += $this->at(0, 0) === '*' ? 1 : 0;
         $count += $this->at(0, 1) === '*' ? 1 : 0;
         $count += $this->at(0, 2) === '*' ? 1 : 0;
+        $count += $this->at(1, 0) === '*' ? 1 : 0;
 
-        return ($count === 2 ||
-            ($this->at(0, 2) === '*' && $this->at(1, 0) === '*'));
+        return ($count === 2);
     }
 }
