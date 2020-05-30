@@ -38,14 +38,9 @@ class World
         }
     }
 
-    public function at(int $row, int $col): string
-    {
-        return $this->cells[$row][$col];
-    }
-
     public function isAlive(int $row, int $col): bool
     {
-        return $this->at($row, $col) === '*';
+        return $this->cells[$row][$col] === '*';
     }
 
     protected function numberOfNeighbors(): int
