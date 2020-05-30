@@ -28,11 +28,9 @@ class GameOfLifeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $gameOfLife = new GameOfLife([
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-        ]);
+        $worldAsString = "... ... ...";
+        $world = array_map(fn($file) => str_split($file), explode(' ', $worldAsString));
+        $gameOfLife = new GameOfLife($world);
 
         $output->writeln("\nGeneration Initial");
         $gameOfLife->print($output);
