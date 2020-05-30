@@ -37,4 +37,11 @@ class WorldBuilder
     {
         return new World($this->cells);
     }
+
+    public function withAliveCells(array $neighbors): self
+    {
+        array_map(fn(array $neighbor) => $this->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
+
+        return $this;
+    }
 }
