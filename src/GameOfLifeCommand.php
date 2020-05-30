@@ -37,10 +37,10 @@ class GameOfLifeCommand extends Command
 
         $numberOfGenerations = (int) $input->getOption('generations');
         for ($currentGeneration = 1; $currentGeneration <= $numberOfGenerations; $currentGeneration++) {
+            $this->clock->wait(1000);
             $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
             $gameOfLife->print($output);
-            $this->clock->wait(1000);
         }
 
         return 0;
