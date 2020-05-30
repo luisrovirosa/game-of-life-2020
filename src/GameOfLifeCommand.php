@@ -34,14 +34,14 @@ class GameOfLifeCommand extends Command
         $gameOfLife = new GameOfLife($this->initialWorld($input));
 
         $output->writeln("\nGeneration Initial");
-        $gameOfLife->print($output);
+        $output->write($gameOfLife->toString());
 
         $numberOfGenerations = (int) $input->getOption('generations');
         for ($currentGeneration = 1; $currentGeneration <= $numberOfGenerations; $currentGeneration++) {
             $this->clock->wait((int) $input->getOption('time_between_generations'));
             $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
-            $gameOfLife->print($output);
+            $output->write($gameOfLife->toString());
         }
 
         return 0;
