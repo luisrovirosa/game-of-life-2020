@@ -23,15 +23,15 @@ class NeighborFinder
 
     private function find(int $row, int $col): array
     {
-        return [
-            ['row' => 0, 'col' => 0],
-            ['row' => 0, 'col' => 1],
-            ['row' => 0, 'col' => 2],
-            ['row' => 1, 'col' => 0],
-            ['row' => 1, 'col' => 2],
-            ['row' => 2, 'col' => 0],
-            ['row' => 2, 'col' => 1],
-            ['row' => 2, 'col' => 2],
-        ];
+        $neighbors = [];
+        for ($i = 0; $i < 3; $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                if ($i !== $row || $j !== $col) {
+                    $neighbors[] = ['row' => $i, 'col' => $j];
+                }
+            }
+        }
+
+        return $neighbors;
     }
 }
