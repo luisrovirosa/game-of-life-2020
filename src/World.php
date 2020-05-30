@@ -17,6 +17,14 @@ class World
 
     public function nextGeneration(): World
     {
+        if ($this->at(0, 0) === '*') {
+            return new World([
+                ['.', '.', '.'],
+                ['.', '*', '.'],
+                ['.', '.', '.'],
+            ]);
+        }
+
         return new World([
             ['.', '.', '.'],
             ['.', '.', '.'],

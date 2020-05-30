@@ -22,4 +22,18 @@ class WorldTest extends TestCase
 
         $this->assertEquals('.', $nextGeneration->at(1, 1));
     }
+
+    /** @test */
+    public function survives_when_2_neighbors(): void
+    {
+        $world = new World([
+            ['*', '*', '.'],
+            ['.', '*', '.'],
+            ['.', '.', '.'],
+        ]);
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals('*', $nextGeneration->at(1, 1));
+    }
 }
