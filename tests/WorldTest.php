@@ -13,7 +13,8 @@ class WorldTest extends TestCase
     /** @test */
     public function dies_when_no_neighbors(): void
     {
-        $world = new World($this->xxx([]));
+        $cells = $this->builderWithCellsAlive([])->aliveAt(1, 1)->build();
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
@@ -23,11 +24,12 @@ class WorldTest extends TestCase
     /**
      * @test
      * @dataProvider oneAliveNeighbor
-     * @param array $cells
+     * @param array $aliveCells
      */
-    public function dies_when_one_neighbors(array $cells): void
+    public function dies_when_one_neighbors(array $aliveCells): void
     {
-        $world = new World($this->xxx($cells));
+        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
@@ -51,11 +53,12 @@ class WorldTest extends TestCase
     /**
      * @test
      * @dataProvider twoAliveNeighbors
-     * @param array $cells
+     * @param array $aliveCells
      */
-    public function survives_when_2_neighbors(array $cells): void
+    public function survives_when_2_neighbors(array $aliveCells): void
     {
-        $world = new World($this->xxx($cells));
+        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
@@ -77,11 +80,12 @@ class WorldTest extends TestCase
     /**
      * @test
      * @dataProvider threeAliveNeighbors
-     * @param array $cells
+     * @param array $aliveCells
      */
-    public function survives_when_3_neighbors(array $cells): void
+    public function survives_when_3_neighbors(array $aliveCells): void
     {
-        $world = new World($this->xxx($cells));
+        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
@@ -103,11 +107,12 @@ class WorldTest extends TestCase
     /**
      * @test
      * @dataProvider moreThanThreeAliveNeighbors
-     * @param array $cells
+     * @param array $aliveCells
      */
-    public function dies_when_more_than_3_neighbors(array $cells): void
+    public function dies_when_more_than_3_neighbors(array $aliveCells): void
     {
-        $world = new World($this->xxx($cells));
+        $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
+        $world = new World($cells);
 
         $nextGeneration = $world->nextGeneration();
 
@@ -124,16 +129,6 @@ class WorldTest extends TestCase
             [[[0, 1], [1, 0], [2, 0], [2, 1]]],
             [[[0, 2], [2, 0], [2, 1], [2, 2]]],
         ];
-    }
-
-    protected function xxx(array $neighbors): array
-    {
-        $cellsBuilder = $this->builderWithCellsAlive($neighbors);
-        $cellsBuilder->aliveAt(1, 1);
-
-        $cells = $cellsBuilder->build();
-
-        return $cells;
     }
 
     protected function builderWithCellsAlive(array $neighbors): CellsBuilder
