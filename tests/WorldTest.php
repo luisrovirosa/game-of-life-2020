@@ -64,6 +64,7 @@ class WorldTest extends TestCase
             [$this->cellsBuilder()->aliveAt(0, 0)->aliveAt(0, 2)->build()],
             [$this->cellsBuilder()->aliveAt(1, 0)->aliveAt(1, 2)->build()],
             [$this->cellsBuilder()->aliveAt(2, 0)->aliveAt(2, 1)->build()],
+            [$this->cellsBuilder()->aliveAt(2, 0)->aliveAt(2, 2)->build()],
         ];
     }
 
