@@ -12,4 +12,9 @@ class Cell
     {
         $this->state = $state;
     }
+
+    public function isAlive(): bool
+    {
+        return $this->state === '*';
+    }
 }

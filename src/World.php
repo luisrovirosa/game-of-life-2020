@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class World
 {
     private array $cells;
+    /** @var Cell[][] */
     private array $realCells;
 
     public function __construct(array $cells)
@@ -40,7 +41,7 @@ class World
 
     public function isAlive(int $row, int $col): bool
     {
-        return $this->cells[$row][$col] === '*';
+        return $this->realCells[$row][$col]->isAlive();
     }
 
     protected function numberOfNeighbors(): int
