@@ -12,6 +12,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GameOfLifeCommand extends Command
 {
     protected static $defaultName = 'gof:run';
+    private Clock $clock;
+
+    public function __construct(Clock $clock = null)
+    {
+        parent::__construct(null);
+        $this->clock = $clock ?? new Clock();
+    }
 
     protected function configure()
     {
@@ -28,6 +35,7 @@ class GameOfLifeCommand extends Command
             $output->writeln("\nGeneration $currentGeneration");
             $gameOfLife->run();
             $gameOfLife->print($output);
+            $this->clock->wait(1000);
         }
 
         return 0;
