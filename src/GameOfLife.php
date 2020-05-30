@@ -10,7 +10,7 @@ class GameOfLife
 
     public function __construct(array $world)
     {
-        $this->world = new World(array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $world));
+        $this->world = (new WorldBuilder($world))->build();
     }
 
     public function run(): void

@@ -8,13 +8,13 @@ class WorldBuilder
 {
     private array $cells;
 
-    public function __construct()
+    public function __construct(array $cells = null)
     {
-        $this->cells = [
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-        ];
+        $this->cells = $cells ?? [
+                ['.', '.', '.'],
+                ['.', '.', '.'],
+                ['.', '.', '.'],
+            ];
     }
 
     public function aliveAt(int $row, int $col): self
