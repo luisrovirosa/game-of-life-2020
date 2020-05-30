@@ -28,6 +28,9 @@ class NeighborFinder
         if ($rowNeighbor - $row > 1) {
             return false;
         }
+        if ($colNeighbor - $col > 1) {
+            return false;
+        }
 
         return true;
     }
