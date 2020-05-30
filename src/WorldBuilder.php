@@ -26,6 +26,6 @@ class WorldBuilder
 
     public function build(): World
     {
-        return new World($this->cells);
+        return new World(array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $this->cells));
     }
 }

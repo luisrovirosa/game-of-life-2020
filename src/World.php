@@ -13,7 +13,7 @@ class World
 
     public function __construct(array $cells)
     {
-        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $cells);
+        $this->cells = $cells;
     }
 
     public function nextGeneration(): World
