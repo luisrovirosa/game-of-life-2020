@@ -17,9 +17,7 @@ class World
 
     public function nextGeneration(): World
     {
-        if (($this->at(0, 0) === '*' && $this->at(0, 1) === '*') ||
-            ($this->at(0, 1) === '*' && $this->at(0, 2) === '*') ||
-            ($this->at(0, 2) === '*' && $this->at(1, 0) === '*')) {
+        if ($this->hasTwoNeighbors()) {
             return new World([
                 ['.', '.', '.'],
                 ['.', '*', '.'],
@@ -44,5 +42,12 @@ class World
     public function at(int $row, int $col): string
     {
         return $this->cells[$row][$col];
+    }
+
+    protected function hasTwoNeighbors(): bool
+    {
+        return ($this->at(0, 0) === '*' && $this->at(0, 1) === '*') ||
+            ($this->at(0, 1) === '*' && $this->at(0, 2) === '*') ||
+            ($this->at(0, 2) === '*' && $this->at(1, 0) === '*');
     }
 }
