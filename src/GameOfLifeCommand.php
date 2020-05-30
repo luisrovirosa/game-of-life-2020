@@ -26,7 +26,7 @@ class GameOfLifeCommand extends Command
              ->addOption('generations', 'g', InputOption::VALUE_OPTIONAL, 'The number of generations created', 10);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $gameOfLife = new GameOfLife([
             ['.', '.', '.'],
