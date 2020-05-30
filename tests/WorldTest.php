@@ -27,7 +27,7 @@ class WorldTest extends TestCase
      */
     public function dies_when_one_neighbors(array $cells): void
     {
-        $world = new World($cells);
+        $world = new World($this->cellsWithNeighborsAlive($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -37,14 +37,14 @@ class WorldTest extends TestCase
     public function oneNeighbor(): array
     {
         return [
-            [$this->cellsWithNeighborsAlive([[0, 0]])],
-            [$this->cellsWithNeighborsAlive([[0, 1]])],
-            [$this->cellsWithNeighborsAlive([[0, 2]])],
-            [$this->cellsWithNeighborsAlive([[1, 0]])],
-            [$this->cellsWithNeighborsAlive([[1, 2]])],
-            [$this->cellsWithNeighborsAlive([[2, 0]])],
-            [$this->cellsWithNeighborsAlive([[2, 1]])],
-            [$this->cellsWithNeighborsAlive([[2, 2]])],
+            [[[0, 0]]],
+            [[[0, 1]]],
+            [[[0, 2]]],
+            [[[1, 0]]],
+            [[[1, 2]]],
+            [[[2, 0]]],
+            [[[2, 1]]],
+            [[[2, 2]]],
         ];
     }
 
@@ -55,7 +55,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_2_neighbors(array $cells): void
     {
-        $world = new World($cells);
+        $world = new World($this->cellsWithNeighborsAlive($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -65,12 +65,12 @@ class WorldTest extends TestCase
     public function twoNeighbors(): array
     {
         return [
-            [$this->cellsWithNeighborsAlive([[0, 0], [0, 1]])],
-            [$this->cellsWithNeighborsAlive([[0, 1], [0, 2]])],
-            [$this->cellsWithNeighborsAlive([[0, 0], [0, 2]])],
-            [$this->cellsWithNeighborsAlive([[1, 0], [1, 2]])],
-            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1]])],
-            [$this->cellsWithNeighborsAlive([[2, 0], [2, 2]])],
+            [[[0, 0], [0, 1]]],
+            [[[0, 1], [0, 2]]],
+            [[[0, 0], [0, 2]]],
+            [[[1, 0], [1, 2]]],
+            [[[2, 0], [2, 1]]],
+            [[[2, 0], [2, 2]]],
         ];
     }
 
@@ -81,7 +81,7 @@ class WorldTest extends TestCase
      */
     public function survives_when_3_neighbors(array $cells): void
     {
-        $world = new World($cells);
+        $world = new World($this->cellsWithNeighborsAlive($cells));
 
         $nextGeneration = $world->nextGeneration();
 
@@ -91,23 +91,18 @@ class WorldTest extends TestCase
     public function threeNeighbors(): array
     {
         return [
-            [$this->cellsWithNeighborsAlive([[0, 0], [0, 1], [0, 2]])],
-            [$this->cellsWithNeighborsAlive([[0, 1], [0, 2], [1, 0]])],
-            [$this->cellsWithNeighborsAlive([[0, 0], [0, 2], [1, 2]])],
-            [$this->cellsWithNeighborsAlive([[1, 0], [1, 2], [0, 0]])],
-            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1], [1, 1]])],
-            [$this->cellsWithNeighborsAlive([[2, 0], [2, 1], [2, 2]])],
+            [[[0, 0], [0, 1], [0, 2]]],
+            [[[0, 1], [0, 2], [1, 0]]],
+            [[[0, 0], [0, 2], [1, 2]]],
+            [[[1, 0], [1, 2], [0, 0]]],
+            [[[2, 0], [2, 1], [1, 1]]],
+            [[[2, 0], [2, 1], [2, 2]]],
         ];
-    }
-
-    protected function cellsWithCentralCellAlive(): CellsBuilder
-    {
-        return (new CellsBuilder())->aliveAt(1, 1);
     }
 
     protected function cellsWithNeighborsAlive(array $neighbors): array
     {
-        $cellsBuilder = $this->cellsWithCentralCellAlive();
+        $cellsBuilder = (new CellsBuilder())->aliveAt(1, 1);
         array_map(fn(array $neighbor) => $cellsBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
 
         return $cellsBuilder->build();
