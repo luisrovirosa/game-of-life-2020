@@ -50,11 +50,11 @@ class World
         $neighbors = [
             ['row' => 0, 'col' => 0],
             ['row' => 0, 'col' => 1],
+            ['row' => 0, 'col' => 2],
         ];
         foreach ($neighbors as $coordinated) {
             $count += $this->at($coordinated['row'], $coordinated['col']) === '*' ? 1 : 0;
         }
-        $count += $this->at(0, 2) === '*' ? 1 : 0;
         $count += $this->at(1, 0) === '*' ? 1 : 0;
 
         return ($count === 2);
