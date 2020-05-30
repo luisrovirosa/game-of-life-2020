@@ -16,7 +16,7 @@ class WorldBuilder
                 ['.', '.', '.'],
                 ['.', '.', '.'],
             ];
-        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => $cell === '*' ? Cell::alive() : Cell::dead(), $row), $stringCells);
+        $this->cells = (new CellsBuilder($stringCells))->build();
     }
 
     public function aliveAt(int $row, int $col): self
