@@ -19,11 +19,12 @@ class World
     public function nextGeneration(): World
     {
         $numberOfNeighbors = $this->numberOfNeighbors();
+        $cellsBuilder = new CellsBuilder();
         if ($numberOfNeighbors === 2 || $numberOfNeighbors === 3) {
-            return new World((new CellsBuilder())->aliveAt(1, 1)->build());
+            return new World(($cellsBuilder)->aliveAt(1, 1)->build());
         }
 
-        return new World((new CellsBuilder())->build());
+        return new World(($cellsBuilder)->build());
     }
 
     public function print(OutputInterface $output): void
