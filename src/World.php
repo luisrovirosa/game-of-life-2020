@@ -32,7 +32,7 @@ class World
         ]);
     }
 
-    public function print(OutputInterface $output)
+    public function print(OutputInterface $output): void
     {
         foreach ($this->cells as $file) {
             $output->writeln(implode('', $file));
