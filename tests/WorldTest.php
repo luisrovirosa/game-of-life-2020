@@ -80,13 +80,11 @@ class WorldTest extends TestCase
 
     public function twoNeighbors(): array
     {
+        $cells = (new CellsBuilder())->aliveAt(0, 0)->aliveAt(0, 1)->build();
+
         return [
             [
-                [
-                    ['*', '*', '.'],
-                    ['.', '*', '.'],
-                    ['.', '.', '.'],
-                ],
+                $cells,
             ],
             [
                 [
