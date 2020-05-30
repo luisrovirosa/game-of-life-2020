@@ -46,8 +46,12 @@ class World
 
     protected function hasTwoNeighbors(): bool
     {
-        return ($this->at(0, 0) === '*' && $this->at(0, 1) === '*') ||
+        $count = 0;
+        $count += $this->at(0, 0) === '*' ? 1 : 0;
+        $count += $this->at(0, 1) === '*' ? 1 : 0;
+
+        return ($count === 2 ||
             ($this->at(0, 1) === '*' && $this->at(0, 2) === '*') ||
-            ($this->at(0, 2) === '*' && $this->at(1, 0) === '*');
+            ($this->at(0, 2) === '*' && $this->at(1, 0) === '*'));
     }
 }
