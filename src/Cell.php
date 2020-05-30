@@ -17,4 +17,9 @@ class Cell
     {
         return $this->state === '*';
     }
+
+    public function toString(): string
+    {
+        return $this->state;
+    }
 }

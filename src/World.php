@@ -8,13 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class World
 {
-    private array $cells;
     /** @var Cell[][] */
     private array $realCells;
 
     public function __construct(array $cells)
     {
-        $this->cells = $cells;
         $this->realCells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $cells);
     }
 
@@ -34,8 +32,9 @@ class World
 
     public function print(OutputInterface $output): void
     {
-        foreach ($this->cells as $row) {
-            $output->writeln(implode('', $row));
+        foreach ($this->realCells as $row) {
+            $stringRow = array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString());
+            $output->writeln($stringRow);
         }
     }
 
