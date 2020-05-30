@@ -107,6 +107,9 @@ class WorldTest extends TestCase
 
     protected function cellsWithNeighborsAlive(array $neighbors): array
     {
-        return $this->cellsWithCentralCellAlive()->aliveAt($neighbors[0][0], $neighbors[0][1])->build();
+        $cellsBuilder = $this->cellsWithCentralCellAlive();
+        array_map(fn(array $neighbor) => $cellsBuilder->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
+
+        return $cellsBuilder->build();
     }
 }
