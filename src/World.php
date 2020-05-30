@@ -56,8 +56,8 @@ class World
             ['row' => 2, 'col' => 1],
             ['row' => 2, 'col' => 2],
         ];
-        $count = count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
+        $numberOfNeighborsAlive = count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
 
-        return ($count === 2);
+        return $numberOfNeighborsAlive === 2;
     }
 }
