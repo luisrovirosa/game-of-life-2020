@@ -18,7 +18,7 @@ class World
     {
         $worldBuilder = new WorldBuilder();
         $originalCell = $this->cells[1][1];
-        $cell = $originalCell->nextGeneration($this->numberOfNeighbors());
+        $cell = $originalCell->nextGeneration($this->numberOfNeighbors(1, 1));
         $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();
@@ -29,12 +29,14 @@ class World
         return $this->cells[$row][$col]->isAlive();
     }
 
-    protected function numberOfNeighbors(): int
+    protected function numberOfNeighbors(int $row, int $col): int
     {
-        return count(array_filter($this->neighbors(), fn($coordinate): bool => $this->cells[$coordinate['row']][$coordinate['col']]->isAlive()));
+        $isAliveFilter = fn($coordinate): bool => $this->cells[$coordinate['row']][$coordinate['col']]->isAlive();
+
+        return count(array_filter($this->neighbors($row, $col), $isAliveFilter));
     }
 
-    protected function neighbors(): array
+    protected function neighbors(int $row, int $col): array
     {
         return [
             ['row' => 0, 'col' => 0],
