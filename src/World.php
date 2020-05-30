@@ -19,14 +19,10 @@ class World
     public function nextGeneration(): World
     {
         $worldBuilder = new WorldBuilder();
+        $originalCell = $this->cells[1][1];
         $numberOfNeighbors = $this->numberOfNeighbors();
-        $cell = new Cell('.');
-        if ($this->isAlive(1, 1) && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
-            $cell = new Cell('*');
-        }
-        if (!$this->isAlive(1, 1) && $numberOfNeighbors === 3) {
-            $cell = new Cell('*');
-        }
+        $cell = $originalCell->nextGeneration($numberOfNeighbors);
+
         $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();

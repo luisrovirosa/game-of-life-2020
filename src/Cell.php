@@ -18,6 +18,19 @@ class Cell
         return $this->state === '*';
     }
 
+    public function nextGeneration(int $numberOfNeighbors): Cell
+    {
+        $cell = new Cell('.');
+        if ($this->isAlive() && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
+            $cell = new Cell('*');
+        }
+        if (!$this->isAlive() && $numberOfNeighbors === 3) {
+            $cell = new Cell('*');
+        }
+
+        return $cell;
+    }
+
     public function toString(): string
     {
         return $this->state;
