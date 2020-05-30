@@ -22,7 +22,7 @@ class WorldTest extends TestCase
 
     /**
      * @test
-     * @dataProvider oneNeighbor
+     * @dataProvider oneAliveNeighbor
      * @param array $cells
      */
     public function dies_when_one_neighbors(array $cells): void
@@ -34,7 +34,7 @@ class WorldTest extends TestCase
         $this->assertEquals('.', $nextGeneration->at(1, 1));
     }
 
-    public function oneNeighbor(): array
+    public function oneAliveNeighbor(): array
     {
         return [
             [[[0, 0]]],
@@ -50,7 +50,7 @@ class WorldTest extends TestCase
 
     /**
      * @test
-     * @dataProvider twoNeighbors
+     * @dataProvider twoAliveNeighbors
      * @param array $cells
      */
     public function survives_when_2_neighbors(array $cells): void
@@ -62,7 +62,7 @@ class WorldTest extends TestCase
         $this->assertEquals('*', $nextGeneration->at(1, 1));
     }
 
-    public function twoNeighbors(): array
+    public function twoAliveNeighbors(): array
     {
         return [
             [[[0, 0], [0, 1]]],
@@ -76,7 +76,7 @@ class WorldTest extends TestCase
 
     /**
      * @test
-     * @dataProvider threeNeighbors
+     * @dataProvider threeAliveNeighbors
      * @param array $cells
      */
     public function survives_when_3_neighbors(array $cells): void
@@ -88,7 +88,7 @@ class WorldTest extends TestCase
         $this->assertEquals('*', $nextGeneration->at(1, 1));
     }
 
-    public function threeNeighbors(): array
+    public function threeAliveNeighbors(): array
     {
         return [
             [[[0, 0], [0, 1], [0, 2]]],
