@@ -16,13 +16,13 @@ class Cell
     public function nextGeneration(int $numberOfNeighbors): Cell
     {
         if ($this->isAlive() && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
-            return new Cell('*');
+            return Cell::alive();
         }
         if ($this->isDead() && $numberOfNeighbors === 3) {
-            return new Cell('*');
+            return Cell::alive();
         }
 
-        return new Cell('.');
+        return Cell::dead();
     }
 
     public function isAlive(): bool
