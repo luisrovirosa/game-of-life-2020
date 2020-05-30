@@ -23,11 +23,7 @@ class World
             return new World((new CellsBuilder())->aliveAt(1, 1)->build());
         }
 
-        return new World([
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-        ]);
+        return new World((new CellsBuilder())->build());
     }
 
     public function print(OutputInterface $output): void
