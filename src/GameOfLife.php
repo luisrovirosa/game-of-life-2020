@@ -20,6 +20,6 @@ class GameOfLife
 
     public function print(OutputInterface $output): void
     {
-        $this->world->print($output);
+        $output->write($this->world->toString());
     }
 }

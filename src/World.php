@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Katas;
 
-use Symfony\Component\Console\Output\OutputInterface;
-
 class World
 {
     /** @var Cell[][] */
@@ -24,16 +22,6 @@ class World
         $worldBuilder->setCell(1, 1, $cell);
 
         return $worldBuilder->build();
-    }
-
-    public function print(OutputInterface $output): void
-    {
-        $toString = '';
-        foreach ($this->cells as $row) {
-            $stringRow = array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString());
-            $toString .= $stringRow . PHP_EOL;
-        }
-        $output->write($toString);
     }
 
     public function isAlive(int $row, int $col): bool
@@ -58,5 +46,16 @@ class World
             ['row' => 2, 'col' => 1],
             ['row' => 2, 'col' => 2],
         ];
+    }
+
+    public function toString(): string
+    {
+        $toString = '';
+        foreach ($this->cells as $row) {
+            $stringRow = array_reduce($row, fn(?string $carry, Cell $cell): string => $carry . $cell->toString());
+            $toString .= $stringRow . PHP_EOL;
+        }
+
+        return $toString;
     }
 }
