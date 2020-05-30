@@ -131,6 +131,35 @@ class WorldTest extends TestCase
         ];
     }
 
+    /**
+     * @test
+     * @dataProvider lessOrMoreThan3Neighbors
+     * @param array $aliveCells
+     */
+    public function remains_dead_when_less_or_more_than_3_neighbors(array $aliveCells): void
+    {
+        $cells = $this->builderWithCellsAlive($aliveCells)->build();
+        $world = new World($cells);
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals('.', $nextGeneration->at(1, 1));
+    }
+
+    public function lessOrMoreThan3Neighbors(): array
+    {
+        return [
+            [[[0, 0]]],
+            [[[0, 2]]],
+            [[[0, 0], [1, 0]]],
+            [[[1, 0], [1, 2]]],
+            [[[2, 0], [2, 2]]],
+            [[[0, 1], [0, 2], [1, 0], [1, 2]]],
+            [[[0, 1], [1, 0], [2, 0], [2, 1]]],
+            [[[0, 2], [2, 0], [2, 1], [2, 2]]],
+        ];
+    }
+
     protected function builderWithCellsAlive(array $neighbors): CellsBuilder
     {
         $cellsBuilder = new CellsBuilder();

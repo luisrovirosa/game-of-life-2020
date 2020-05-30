@@ -19,7 +19,7 @@ class World
     {
         $cellsBuilder = new CellsBuilder();
         $numberOfNeighbors = $this->numberOfNeighbors();
-        if ($numberOfNeighbors === 2 || $numberOfNeighbors === 3) {
+        if ($this->at(1, 1) === '*' && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
             $cellsBuilder->aliveAt(1, 1);
         }
 
