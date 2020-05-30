@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Katas;
 
+use Katas\Tests\CellsBuilder;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class World
@@ -19,11 +20,7 @@ class World
     {
         $numberOfNeighbors = $this->numberOfNeighbors();
         if ($numberOfNeighbors === 2 || $numberOfNeighbors === 3) {
-            return new World([
-                ['.', '.', '.'],
-                ['.', '*', '.'],
-                ['.', '.', '.'],
-            ]);
+            return new World((new CellsBuilder())->aliveAt(1, 1)->build());
         }
 
         return new World([
