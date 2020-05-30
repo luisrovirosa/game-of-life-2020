@@ -6,14 +6,6 @@ namespace Katas;
 
 class NeighborFinder
 {
-    /** @var Cell[][] */
-    private array $cells;
-
-    public function __construct(array $cells)
-    {
-        $this->cells = $cells;
-    }
-
     public function find(int $row, int $col): array
     {
         $neighbors = [];

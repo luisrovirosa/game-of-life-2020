@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Katas\Tests;
 
-use Katas\CellsBuilder;
 use Katas\NeighborFinder;
 use PHPUnit\Framework\TestCase;
 
@@ -15,13 +14,11 @@ class NeighborFinderTest extends TestCase
      * @dataProvider scenarios
      * @param int $row
      * @param int $col
-     * @param array $aliveNeighbors
-     * @param $expectedNeighbors
+     * @param int $expectedNeighbors
      */
-    public function find_the_number_of_alive_neighbors(int $row, int $col, $expectedNumberOfNeighbors): void
+    public function find_the_number_of_alive_neighbors(int $row, int $col, int $expectedNumberOfNeighbors): void
     {
-        $cells = (new CellsBuilder())->build();
-        $finder = new NeighborFinder($cells);
+        $finder = new NeighborFinder();
 
         $numberOfAliveNeighbors = $finder->find($row, $col);
 
