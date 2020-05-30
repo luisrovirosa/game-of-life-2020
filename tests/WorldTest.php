@@ -10,23 +10,12 @@ use PHPUnit\Framework\TestCase;
 
 class WorldTest extends TestCase
 {
-    /** @test */
-    public function dies_when_no_neighbors(): void
-    {
-        $cells = $this->builderWithCellsAlive([])->aliveAt(1, 1)->build();
-        $world = new World($cells);
-
-        $nextGeneration = $world->nextGeneration();
-
-        $this->assertEquals('.', $nextGeneration->at(1, 1));
-    }
-
     /**
      * @test
      * @dataProvider oneAliveNeighbor
      * @param array $aliveCells
      */
-    public function dies_when_one_neighbors(array $aliveCells): void
+    public function dies_by_underpopulation_when_is_alive_and_has_less_than_2_neighbors(array $aliveCells): void
     {
         $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
         $world = new World($cells);
@@ -39,14 +28,15 @@ class WorldTest extends TestCase
     public function oneAliveNeighbor(): array
     {
         return [
-            [[[0, 0]]],
-            [[[0, 1]]],
-            [[[0, 2]]],
-            [[[1, 0]]],
-            [[[1, 2]]],
-            [[[2, 0]]],
-            [[[2, 1]]],
-            [[[2, 2]]],
+            'no neighbors' => [[]],
+            'one neighbor at 0,0' => [[[0, 0]]],
+            'one neighbor at 0,1' => [[[0, 1]]],
+            'one neighbor at 0,2' => [[[0, 2]]],
+            'one neighbor at 1,0' => [[[1, 0]]],
+            'one neighbor at 1,2' => [[[1, 2]]],
+            'one neighbor at 2,0' => [[[2, 0]]],
+            'one neighbor at 2,1' => [[[2, 1]]],
+            'one neighbor at 2,2' => [[[2, 2]]],
         ];
     }
 
@@ -55,7 +45,7 @@ class WorldTest extends TestCase
      * @dataProvider twoAliveNeighbors
      * @param array $aliveCells
      */
-    public function survives_when_2_neighbors(array $aliveCells): void
+    public function survives_when_is_alive_and_has_2_neighbors(array $aliveCells): void
     {
         $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
         $world = new World($cells);
@@ -82,7 +72,7 @@ class WorldTest extends TestCase
      * @dataProvider threeAliveNeighbors
      * @param array $aliveCells
      */
-    public function survives_when_3_neighbors(array $aliveCells): void
+    public function survives_when_is_alive_and_has_3_neighbors(array $aliveCells): void
     {
         $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
         $world = new World($cells);
@@ -109,7 +99,7 @@ class WorldTest extends TestCase
      * @dataProvider moreThanThreeAliveNeighbors
      * @param array $aliveCells
      */
-    public function dies_when_more_than_3_neighbors(array $aliveCells): void
+    public function dies_when_is_alive_and_has_more_than_3_neighbors(array $aliveCells): void
     {
         $cells = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
         $world = new World($cells);
