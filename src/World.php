@@ -30,4 +30,9 @@ class World
             $output->writeln(implode('', $file));
         }
     }
+
+    public function at(int $row, int $col): string
+    {
+        return $this->cells[$row][$col];
+    }
 }

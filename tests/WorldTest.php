@@ -20,11 +20,6 @@ class WorldTest extends TestCase
 
         $nextGeneration = $world->nextGeneration();
 
-        $expectedWorld = new World([
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-        ]);
-        $this->assertEquals($expectedWorld, $nextGeneration);
+        $this->assertEquals('.', $nextGeneration->at(1, 1));
     }
 }
