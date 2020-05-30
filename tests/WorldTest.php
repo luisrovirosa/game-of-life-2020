@@ -99,7 +99,7 @@ class WorldTest extends TestCase
             [[[0, 1], [0, 2], [1, 0]]],
             [[[0, 0], [0, 2], [1, 2]]],
             [[[1, 0], [1, 2], [0, 0]]],
-            [[[2, 0], [2, 1], [1, 1]]],
+            [[[2, 0], [2, 1], [1, 0]]],
             [[[2, 0], [2, 1], [2, 2]]],
         ];
     }
@@ -158,6 +158,21 @@ class WorldTest extends TestCase
             [[[0, 1], [1, 0], [2, 0], [2, 1]]],
             [[[0, 2], [2, 0], [2, 1], [2, 2]]],
         ];
+    }
+
+    /**
+     * @test
+     * @dataProvider threeAliveNeighbors
+     * @param array $aliveCells
+     */
+    public function reproduces_when_is_dead_and_has_3_neighbors(array $aliveCells): void
+    {
+        $cells = $this->builderWithCellsAlive($aliveCells)->build();
+        $world = new World($cells);
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals('*', $nextGeneration->at(1, 1));
     }
 
     protected function builderWithCellsAlive(array $neighbors): CellsBuilder

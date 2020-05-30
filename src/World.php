@@ -22,6 +22,9 @@ class World
         if ($this->at(1, 1) === '*' && ($numberOfNeighbors === 2 || $numberOfNeighbors === 3)) {
             $cellsBuilder->aliveAt(1, 1);
         }
+        if ($this->at(1, 1) === '.' && $numberOfNeighbors === 3) {
+            $cellsBuilder->aliveAt(1, 1);
+        }
 
         return new World(($cellsBuilder)->build());
     }
