@@ -25,6 +25,9 @@ class NeighborFinder
         if ($this->isThemselves($rowNeighbor, $row, $colNeighbor, $col)) {
             return false;
         }
+        if ($rowNeighbor - $row > 1) {
+            return false;
+        }
 
         return true;
     }
