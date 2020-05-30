@@ -21,7 +21,14 @@ class WorldBuilder
 
     public function aliveAt(int $row, int $col): self
     {
-        $this->cells[$row][$col] = new Cell('*');
+        $this->setCell($row, $col, new Cell('*'));
+
+        return $this;
+    }
+
+    public function setCell(int $row, int $col, Cell $cell): self
+    {
+        $this->cells[$row][$col] = $cell;
 
         return $this;
     }
