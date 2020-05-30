@@ -46,7 +46,17 @@ class World
 
     protected function hasTwoNeighbors(): bool
     {
-        $neighbors = [
+        return $this->numberOfNeighbors($this->neighbors()) === 2;
+    }
+
+    protected function numberOfNeighbors(array $neighbors): int
+    {
+        return count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
+    }
+
+    protected function neighbors(): array
+    {
+        return [
             ['row' => 0, 'col' => 0],
             ['row' => 0, 'col' => 1],
             ['row' => 0, 'col' => 2],
@@ -56,12 +66,5 @@ class World
             ['row' => 2, 'col' => 1],
             ['row' => 2, 'col' => 2],
         ];
-
-        return $this->numberOfNeighbors($neighbors) === 2;
-    }
-
-    protected function numberOfNeighbors(array $neighbors): int
-    {
-        return count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
     }
 }
