@@ -8,6 +8,6 @@ class Clock
 {
     public function wait(int $miliseconds): void
     {
-        usleep($miliseconds * 1000);
+//        usleep($miliseconds * 1000);
     }
 }
