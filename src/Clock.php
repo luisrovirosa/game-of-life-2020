@@ -6,8 +6,8 @@ namespace Katas;
 
 class Clock
 {
-    public function wait(int $miliseconds): void
+    public function wait(int $milliseconds): void
     {
-        usleep($miliseconds * 1000);
+        usleep($milliseconds * 1000);
     }
 }
