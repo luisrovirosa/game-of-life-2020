@@ -34,8 +34,8 @@ class World
 
     public function print(OutputInterface $output): void
     {
-        foreach ($this->cells as $file) {
-            $output->writeln(implode('', $file));
+        foreach ($this->cells as $row) {
+            $output->writeln(implode('', $row));
         }
     }
 
