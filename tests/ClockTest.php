@@ -12,22 +12,24 @@ class ClockTest extends TestCase
     /**
      * @test
      * @dataProvider positiveMilliseconds
+     * @param int $millisecondsToWait
      */
-    public function waits_the_expected_time($milisecondsToWait): void
+    public function waits_the_expected_time(int $millisecondsToWait): void
     {
         $clock = new Clock();
         $initialTime = microtime(true) * 1000;
 
-        $clock->wait($milisecondsToWait);
+        $clock->wait($millisecondsToWait);
 
         $finalTime = microtime(true) * 1000;
-        $this->assertEqualsWithDelta($milisecondsToWait, $finalTime - $initialTime, 10);
+        $this->assertEqualsWithDelta($millisecondsToWait, $finalTime - $initialTime, 1);
     }
 
     public function positiveMilliseconds(): array
     {
         return [
-            [100],
+            'Very small amount' => [1],
+            'Small amount' => [10],
         ];
     }
 }
