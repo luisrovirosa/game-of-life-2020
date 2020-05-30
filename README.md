@@ -1,95 +1,42 @@
-# PHP and PHPUnit Kata Bootstrap
-1 minute setup to start practicing a kata 
-## TL;DR
+# Conway's Game of Life
+Kata solution in PHP done in strict TDD.
 
-    git clone https://github.com/CodiumTeam/php-kata-bootstrap
-    cd php-kata-bootstrap
-First option: I already have installed PHP 7.4 and composer
+# How to run the kata
+## Install the dependencies
+Using PHP 7.4 installed locally
 
-    make dependencies
-    make tests
-    make coverage
+    make install
 
-Second option: I already have installed docker
+or using docker
 
     make docker-build
-    make docker-tests
-    make docker-coverage
+## Run the code
+Using PHP 7.4 installed locally
 
-## Goal
-- Simplify the setup of a PHP environment for katas
-- Tests running in seconds
-- Setup with or without docker
-- Tutorial to run the tests inside PhpStorm
- 
-## Content
-- PHP 7.4
-- PHPUnit 9 (Compatible with PHP 7.3 and 7.4)
-- First PHPUnit test
-- Phpstorm settings
+    make run
+ or using docker
 
-# 0. Prerequisites
-- [Docker](https://docs.docker.com/engine/installation/)
-- [PhpStorm](https://www.jetbrains.com/phpstorm/download) with docker support (>= 2016.3) Optional
+    make docker-run
 
-# 1. Prepare the setup
-## 1.1. With docker
-    make docker-build
+## Run the tests
+Using PHP 7.4 installed locally
 
-## 1.2. Without docker
-
-    make dependencies
-    
-# 2. Tests
-## 2.1. Command line with docker
-    make docker-tests
-## 2.2. Command line without docker
     make tests
-## 2.3. PHPStorm with docker
-### 2.3.1. Configure docker
-Follow the instructions according your [operating system](https://blog.jetbrains.com/phpstorm/2015/10/docker-support-in-phpstorm/)
+ or using docker
 
-In linux is:
+    make docker-tests
+## Play with arguments and options
+Using PHP 7.4 installed locally
 
-    Open: Preferences
-    Click: Build, execution, deployment | Docker
-    Click: +
-    Write: API Url: unix:///var/run/docker.sock
-    Write: Docker compose executable: /usr/local/bin/docker-compose 
+    ./console gof:run --help
+ or using docker
 
-In Mac is:
+    docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap ./console gof:run --help
 
-    Open: Preferences
-    Click: Build, execution, deployment | Docker
-    Click: +
-    Click: Docker for Mac
-### 2.3.2. Configure Interpreter
-    Click: Languages & Frameworks | PHP 
-    Click: CLI Interpreter | ...
-    Click: + | From Docker, Vagrant...
-    Select: Remote | Docker
-    Write: Image name: php-docker-bootstrap
-    Write: Php interpreter: php
-    Write: Name: Docker PHP 7.4
-### 2.3.3. Configure PHPUnit
-    Click: Languages & Frameworks | PHP | Test Frameworks 
-    Click: + | By Remote Interpreter
-    Select: Cli interpreter: Docker PHP 7.4
-    Click: PHP Unit library: Use composer autoloader
-    Write: Path to script: vendor/autoloader.php
-### 2.3.4. Run
-    Right click: tests folder | Run 'tests'
+## Code coverage
+Using PHP 7.4 installed locally
 
-# 3. Code coverage
-## 3.1. Command line with docker
-    make docker-coverage
-## 3.2. Command line without docker
     make coverage
-##  3.3. PHPStorm 
-    Right click: tests folder | Run 'tests with Coverage'
-# 4. Use another PHP Version
-If you want to use other version of PHP it's as easy as follow the steps:
-- Edit Dockerfile
-- Select a valid version of PHP from [Docker Hub](https://hub.docker.com/_/php/)
-- Follow the "Prepare setup" steps
-- Validate the composer.json to verify all the requisites are satisfied.
+ or using docker
+
+    make docker-coverage
