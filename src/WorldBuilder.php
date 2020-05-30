@@ -6,26 +6,28 @@ namespace Katas;
 
 class WorldBuilder
 {
+    /** @var Cell[][] */
     private array $cells;
 
     public function __construct(array $cells = null)
     {
-        $this->cells = $cells ?? [
+        $stringCells = $cells ?? [
                 ['.', '.', '.'],
                 ['.', '.', '.'],
                 ['.', '.', '.'],
             ];
+        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $stringCells);
     }
 
     public function aliveAt(int $row, int $col): self
     {
-        $this->cells[$row][$col] = '*';
+        $this->cells[$row][$col] = new Cell('*');
 
         return $this;
     }
 
     public function build(): World
     {
-        return new World(array_map(fn(array $row): array => array_map(fn(string $cell): Cell => new Cell($cell), $row), $this->cells));
+        return new World($this->cells);
     }
 }
