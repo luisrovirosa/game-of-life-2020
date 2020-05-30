@@ -46,12 +46,12 @@ class World
 
     protected function hasTwoNeighbors(): bool
     {
-        return $this->numberOfNeighbors($this->neighbors()) === 2;
+        return $this->numberOfNeighbors() === 2;
     }
 
-    protected function numberOfNeighbors(array $neighbors): int
+    protected function numberOfNeighbors(): int
     {
-        return count(array_filter($neighbors, fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
+        return count(array_filter($this->neighbors(), fn($coordinated): bool => $this->at($coordinated['row'], $coordinated['col']) === '*'));
     }
 
     protected function neighbors(): array
