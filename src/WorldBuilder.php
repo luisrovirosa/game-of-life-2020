@@ -34,7 +34,7 @@ class WorldBuilder
         return $this;
     }
 
-    public function withCells(?array $cells): self
+    public function withCells(array $cells): self
     {
         $this->cellsBuilder->withCells($cells);
 

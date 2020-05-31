@@ -44,9 +44,8 @@ class CellsBuilder
         return $this;
     }
 
-    public function withCells(?array $stringCells): self
+    public function withCells(array $stringCells): self
     {
-        $stringCells = $stringCells ?? [];
         foreach ($stringCells as $rowPosition => $rowContent) {
             foreach ($rowContent as $colPosition => $cellValue) {
                 $cell = $cellValue === '*' ? Cell::alive() : Cell::dead();
