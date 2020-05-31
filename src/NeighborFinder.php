@@ -9,10 +9,10 @@ class NeighborFinder
     private int $numberOfRows;
     private int $numberOfCols;
 
-    public function __construct()
+    public function __construct($numberOfRows, $numberOfCols)
     {
-        $this->numberOfRows = 3;
-        $this->numberOfCols = 3;
+        $this->numberOfRows = $numberOfRows;
+        $this->numberOfCols = $numberOfCols;
     }
 
     public function find(int $row, int $col): array

@@ -13,7 +13,7 @@ class World
     public function __construct(array $cells)
     {
         $this->cells = $cells;
-        $this->neighborFinder = new NeighborFinder();
+        $this->neighborFinder = new NeighborFinder(3, 3);
     }
 
     public function nextGeneration(): World

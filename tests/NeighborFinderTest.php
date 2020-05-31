@@ -18,7 +18,7 @@ class NeighborFinderTest extends TestCase
      */
     public function find_the_number_of_alive_neighbors(int $row, int $col, int $expectedNumberOfNeighbors): void
     {
-        $finder = new NeighborFinder();
+        $finder = new NeighborFinder(3, 3);
 
         $numberOfAliveNeighbors = $finder->find($row, $col);
 
