@@ -12,7 +12,8 @@ class CellsBuilder
     {
         $numberOfRows = 3;
         $numberOfCols = 3;
-        $this->withCells($cells, $numberOfRows, $numberOfCols);
+        $stringCells = $cells ?? array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
+        $this->withCells($stringCells);
     }
 
     /**
@@ -44,10 +45,8 @@ class CellsBuilder
         return $this;
     }
 
-    public function withCells(?array $cells, int $numberOfRows, int $numberOfCols): self
+    public function withCells(array $stringCells): self
     {
-        $stringCells = $cells ?? array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
-
         foreach ($stringCells as $rowPosition => $rowContent) {
             foreach ($rowContent as $colPosition => $cellValue) {
                 $cell = $cellValue === '*' ? Cell::alive() : Cell::dead();
