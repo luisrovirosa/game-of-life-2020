@@ -26,7 +26,8 @@ class GameOfLifeCommand extends Command
         $this->setDescription('Runs the Game of life kata')
              ->addArgument('world', InputArgument::OPTIONAL, "The initial world as string", "... ... ...")
              ->addOption('generations', 'g', InputOption::VALUE_OPTIONAL, 'The number of generations created', 10)
-             ->addOption('time_between_generations', 't', InputOption::VALUE_OPTIONAL, 'Time in milliseconds wait when printing generations', 1000);
+             ->addOption('time_between_generations', 't', InputOption::VALUE_OPTIONAL, 'Time in milliseconds wait when printing generations', 1000)
+             ->addOption('file', 'f', InputOption::VALUE_OPTIONAL, 'File with the initial world configuration');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -48,6 +49,9 @@ class GameOfLifeCommand extends Command
     protected function initialWorld(InputInterface $input): array
     {
         $worldAsString = $input->getArgument('world');
+        if ($input->getOption('file')) {
+            $worldAsString = trim(str_replace("\n", " ", file_get_contents($input->getOption('file'))));
+        }
 
         return array_map(fn($file) => str_split($file), explode(' ', $worldAsString));
     }

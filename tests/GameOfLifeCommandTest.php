@@ -85,6 +85,14 @@ class GameOfLifeCommandTest extends TestCase
         $this->clock->wait($timeBetweenGenerations)->shouldHaveBeenCalled();
     }
 
+    /** @test */
+    public function load_initial_world_from_a_file(): void
+    {
+        $this->executeCommand(['--file' => 'data/blinker_3x3.txt']);
+
+        $this->assertStringContainsString(".*.\n.*.\n.*.", $this->output());
+    }
+
     private function assertPrintsOnlyInitialWorld(): void
     {
         $this->assertPrintsGenerations(0);
