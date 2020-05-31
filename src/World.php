@@ -9,20 +9,16 @@ class World
     /** @var Cell[][] */
     private array $cells;
     private NeighborFinder $neighborFinder;
-    private int $numberOfRows;
-    private int $numberOfCols;
 
     public function __construct(array $cells)
     {
         $this->cells = $cells;
-        $this->numberOfRows = count($cells);
-        $this->numberOfCols = count($cells[0]);
-        $this->neighborFinder = new NeighborFinder($this->numberOfRows, $this->numberOfCols);
+        $this->neighborFinder = new NeighborFinder($this->numberOfRows(), $this->numberOfCols());
     }
 
     public function nextGeneration(): World
     {
-        $worldBuilder = new WorldBuilder($this->numberOfRows, $this->numberOfCols);
+        $worldBuilder = new WorldBuilder($this->numberOfRows(), $this->numberOfCols());
         foreach ($this->cells as $numberOfRow => $row) {
             foreach ($row as $numberOfCol => $cell) {
                 $nextGenerationCell = $cell->nextGeneration($this->numberOfAliveNeighbors($numberOfRow, $numberOfCol));
@@ -51,5 +47,15 @@ class World
         $isAliveFilter = fn($neighborPosition): bool => $this->cells[$neighborPosition['row']][$neighborPosition['col']]->isAlive();
 
         return count(array_filter($this->neighborFinder->find($row, $col), $isAliveFilter));
+    }
+
+    private function numberOfRows(): int
+    {
+        return count($this->cells);
+    }
+
+    private function numberOfCols(): int
+    {
+        return count($this->cells[0]);
     }
 }
