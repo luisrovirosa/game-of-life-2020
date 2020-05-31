@@ -7,11 +7,11 @@ dependencies:
 	composer install
 run:
 	./console gof:run
-run-blinker:
+blinker:
 	./console gof:run -t 500 -g 10 -f data/blinker_3x3.txt
-run-glider:
+glider:
 	./console gof:run -t 500 -g 20 -f data/glider_10x10.txt
-run-pulsar:
+pulsar:
 	./console gof:run -t 500 -g 20 -f data/pulsar_period3.txt
 tests:
 	./vendor/bin/phpunit --color=always
@@ -23,29 +23,22 @@ docker-build:
 	docker build -t php-docker-bootstrap .
 	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make dependencies
 
-docker-run:
-	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make run
-docker-run-blinker:
-	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-blinker
-docker-run-glider:
-	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-glider
-docker-run-pulsar:
-	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-pulsar
-docker-tests:
-	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make tests
-docker-coverage:
-	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make coverage
+docker-in:
+	@docker run --rm -it -v ${PWD}:/opt/project php-docker-bootstrap bash
 
 define HELP
 # Local commands
 	- make dependencies\tInstall the dependencies using composer
+	- make blinker\t\tRun the simulation with blinker setup
+	- make glider\t\tRun the simulation with glider setup
+	- make pulsar\t\tRun the simulation with pulsar setup
 	- make tests\t\tRun the tests
 	- make coverage\t\tRun the code coverage
 # Docker commands
 	- make docker-build\tCreates a PHP image with xdebug and install the dependencies
-	- make docker-tests\tRun the tests on docker
-	- make docker-coverage\tRun the code coverage
- Please execute "make <command>". Example make help
+	- make docker-in\tEnter the docker container to be able to use all the commands as if you have installed PHP 7.4 locally
+ Please execute "make <command>". Example make dependencies
+ You can also run "./console gof:run --help" to play with the options
 
 endef
 

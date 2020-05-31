@@ -1,7 +1,8 @@
 # Conway's Game of Life
-Kata solution in PHP done in strict TDD.
+Kata solution of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in PHP done in strict TDD.
 
 # How to run the kata
+This repository can be used either having installed PHP 7.4 in your machine or docker.
 ## Install the dependencies
 Using PHP 7.4 installed locally
 
@@ -10,33 +11,23 @@ Using PHP 7.4 installed locally
 or using docker
 
     make docker-build
-## Run the code
-Using PHP 7.4 installed locally
 
-    make run
- or using docker
+## Run the simulations
+If you are using docker before running any of the simulations please run  
 
-    make docker-run
+    make docker-in
+
+There are 3 simulations prepared
+
+    make blinker
+    make glider
+    make pulsar
+
+## Play with arguments and options
+    ./console gof:run --help
 
 ## Run the tests
-Using PHP 7.4 installed locally
-
     make tests
- or using docker
-
-    make docker-tests
-## Play with arguments and options
-Using PHP 7.4 installed locally
-
-    ./console gof:run --help
- or using docker
-
-    docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap ./console gof:run --help
 
 ## Code coverage
-Using PHP 7.4 installed locally
-
     make coverage
- or using docker
-
-    make docker-coverage
