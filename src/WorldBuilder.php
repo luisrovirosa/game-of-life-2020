@@ -10,7 +10,7 @@ class WorldBuilder
 
     public function __construct()
     {
-        $this->cellsBuilder = new CellsBuilder();
+        $this->cellsBuilder = new CellsBuilder(3, 3);
     }
 
     public function aliveAt(int $row, int $col): self
