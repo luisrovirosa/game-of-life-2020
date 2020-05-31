@@ -9,16 +9,20 @@ class World
     /** @var Cell[][] */
     private array $cells;
     private NeighborFinder $neighborFinder;
+    private $numberOfRows;
+    private $numberOfCols;
 
     public function __construct(array $cells)
     {
         $this->cells = $cells;
-        $this->neighborFinder = new NeighborFinder(3, 3);
+        $this->numberOfRows = 3;
+        $this->numberOfCols = 3;
+        $this->neighborFinder = new NeighborFinder($this->numberOfRows, $this->numberOfCols);
     }
 
     public function nextGeneration(): World
     {
-        $worldBuilder = new WorldBuilder(3, 3);
+        $worldBuilder = new WorldBuilder($this->numberOfRows, $this->numberOfCols);
         foreach ($this->cells as $numberOfRow => $row) {
             foreach ($row as $numberOfCol => $cell) {
                 $nextGenerationCell = $cell->nextGeneration($this->numberOfAliveNeighbors($numberOfRow, $numberOfCol));

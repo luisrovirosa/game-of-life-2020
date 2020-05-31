@@ -23,7 +23,7 @@ class WorldTest extends TestCase
     public function world_blinker(): void
     {
         $this->markTestIncomplete("Not yet");
-        $world = (new WorldBuilder(3, 3))->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
+        $world = (new WorldBuilder(5, 5))->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
 
         $nextGeneration = $world->nextGeneration();
 
