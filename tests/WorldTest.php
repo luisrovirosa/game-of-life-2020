@@ -22,12 +22,11 @@ class WorldTest extends TestCase
     /** @test */
     public function world_blinker(): void
     {
-        $this->markTestIncomplete("Not yet");
-        $world = (new WorldBuilder(5, 5))->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
+        $world = (new WorldBuilder(5, 5))->withAliveCells([[2, 1], [2, 2], [2, 3]])->build();
 
         $nextGeneration = $world->nextGeneration();
 
-        $this->assertEquals(".....\n..*..\n..*..\n..*..\n.....\n", $nextGeneration->toString());
+        $this->assertEquals(".....\n..*..\n..*..\n..*..\n.....", $nextGeneration->toString());
     }
 
     /**
