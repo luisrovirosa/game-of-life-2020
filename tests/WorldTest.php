@@ -19,6 +19,17 @@ class WorldTest extends TestCase
         $this->assertEquals("**.\n**.\n...", $nextGeneration->toString());
     }
 
+    /** @test */
+    public function world_blinker(): void
+    {
+        $this->markTestIncomplete("Not yet");
+        $world = (new WorldBuilder())->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals(".....\n..*..\n..*..\n..*..\n.....\n", $nextGeneration->toString());
+    }
+
     /**
      * @test
      * @dataProvider noAliveNeighbor
