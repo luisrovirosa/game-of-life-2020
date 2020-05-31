@@ -12,7 +12,12 @@ class CellsBuilder
     {
         $stringCells = $cells ?? array_fill(0, 3, array_fill(0, 3, '.'));
 
-        $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => $cell === '*' ? Cell::alive() : Cell::dead(), $row), $stringCells);
+        foreach ($stringCells as $rowPosition => $rowContent) {
+            foreach ($rowContent as $colPosition => $cellValue) {
+                $cell = $cellValue === '*' ? Cell::alive() : Cell::dead();
+                $this->setCell($rowPosition, $colPosition, $cell);
+            }
+        }
     }
 
     /**
