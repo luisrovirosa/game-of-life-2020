@@ -12,7 +12,7 @@ class WorldTest extends TestCase
     /** @test */
     public function worlds_that_does_not_change(): void
     {
-        $world = (new WorldBuilder())->withAliveCells([[0, 0], [0, 1], [1, 0], [1, 1]])->build();
+        $world = (new WorldBuilder(3, 3))->withAliveCells([[0, 0], [0, 1], [1, 0], [1, 1]])->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -23,7 +23,7 @@ class WorldTest extends TestCase
     public function world_blinker(): void
     {
         $this->markTestIncomplete("Not yet");
-        $world = (new WorldBuilder())->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
+        $world = (new WorldBuilder(3, 3))->withAliveCells([[2, 1], [2, 2], [2, 2]])->build();
 
         $nextGeneration = $world->nextGeneration();
 
@@ -181,6 +181,6 @@ class WorldTest extends TestCase
 
     protected function builderWithCellsAlive(array $neighbors): WorldBuilder
     {
-        return (new WorldBuilder())->withAliveCells($neighbors);
+        return (new WorldBuilder(3, 3))->withAliveCells($neighbors);
     }
 }

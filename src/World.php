@@ -18,7 +18,7 @@ class World
 
     public function nextGeneration(): World
     {
-        $worldBuilder = new WorldBuilder();
+        $worldBuilder = new WorldBuilder(3, 3);
         foreach ($this->cells as $numberOfRow => $row) {
             foreach ($row as $numberOfCol => $cell) {
                 $nextGenerationCell = $cell->nextGeneration($this->numberOfAliveNeighbors($numberOfRow, $numberOfCol));
