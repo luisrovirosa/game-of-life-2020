@@ -6,11 +6,20 @@ namespace Katas;
 
 class NeighborFinder
 {
+    private int $numberOfRows;
+    private int $numberOfCols;
+
+    public function __construct()
+    {
+        $this->numberOfRows = 3;
+        $this->numberOfCols = 3;
+    }
+
     public function find(int $row, int $col): array
     {
         $neighbors = [];
-        for ($i = 0; $i < 3; $i++) {
-            for ($j = 0; $j < 3; $j++) {
+        for ($i = 0; $i < $this->numberOfRows; $i++) {
+            for ($j = 0; $j < $this->numberOfCols; $j++) {
                 if ($this->areNeighbors($row, $col, $i, $j)) {
                     $neighbors[] = ['row' => $i, 'col' => $j];
                 }
