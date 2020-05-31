@@ -10,11 +10,8 @@ class CellsBuilder
 
     public function __construct(array $cells = null)
     {
-        $stringCells = $cells ?? [
-                ['.', '.', '.'],
-                ['.', '.', '.'],
-                ['.', '.', '.'],
-            ];
+        $stringCells = $cells ?? array_fill(0, 3, array_fill(0, 3, '.'));
+
         $this->cells = array_map(fn(array $row): array => array_map(fn(string $cell): Cell => $cell === '*' ? Cell::alive() : Cell::dead(), $row), $stringCells);
     }
 
