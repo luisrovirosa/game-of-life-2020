@@ -1,5 +1,5 @@
 {
-    "name": "codiumteam/php-docker-boostrap",
+    "name": "luisrovirosa/game-of-life-2020",
     "require": {
         "php": "^7.4",
         "symfony/console": "^5.0"
