@@ -9,14 +9,14 @@ class World
     /** @var Cell[][] */
     private array $cells;
     private NeighborFinder $neighborFinder;
-    private $numberOfRows;
-    private $numberOfCols;
+    private int $numberOfRows;
+    private int $numberOfCols;
 
     public function __construct(array $cells)
     {
         $this->cells = $cells;
-        $this->numberOfRows = 3;
-        $this->numberOfCols = 3;
+        $this->numberOfRows = count($cells);
+        $this->numberOfCols = count($cells[0]);
         $this->neighborFinder = new NeighborFinder($this->numberOfRows, $this->numberOfCols);
     }
 

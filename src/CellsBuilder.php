@@ -8,15 +8,11 @@ class CellsBuilder
 {
     /** @var Cell[][] */
     private array $cells;
-    private int $numberOfRows;
-    private int $numberOfCols;
 
     public function __construct(int $numberOfRows, int $numberOfCols)
     {
         $stringCells = array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
         $this->withCells($stringCells);
-        $this->numberOfRows = $numberOfRows;
-        $this->numberOfCols = $numberOfCols;
     }
 
     /**
