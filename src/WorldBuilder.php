@@ -41,6 +41,13 @@ class WorldBuilder
         return $this;
     }
 
+    public static function fromCells(array $cells): self
+    {
+        $worldBuilder = new WorldBuilder(0, 0);
+
+        return $worldBuilder->withCells($cells);
+    }
+
     public function build(): World
     {
         return new World($this->cellsBuilder->build());

@@ -21,4 +21,21 @@ class GameOfLifeTest extends TestCase
 
         $this->assertEquals("...\n...\n...", $gameOfLife->toString());
     }
+
+    /** @test */
+    public function mutates_a_5x5_world(): void
+    {
+        $world = [
+            ['.', '.', '.', '.', '.'],
+            ['.', '.', '*', '.', '.'],
+            ['.', '.', '*', '.', '.'],
+            ['.', '.', '*', '.', '.'],
+            ['.', '.', '.', '.', '.'],
+        ];
+        $gameOfLife = new GameOfLife($world);
+
+        $gameOfLife->run();
+
+        $this->assertEquals(".....\n.....\n.***.\n.....\n.....", $gameOfLife->toString());
+    }
 }

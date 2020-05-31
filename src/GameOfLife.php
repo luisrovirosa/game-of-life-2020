@@ -8,7 +8,7 @@ class GameOfLife
 
     public function __construct(array $world)
     {
-        $this->world = (new WorldBuilder(3, 3))->withCells($world)->build();
+        $this->world = WorldBuilder::fromCells($world)->build();
     }
 
     public function run(): void
