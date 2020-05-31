@@ -13,15 +13,18 @@ class World
     public function __construct(array $cells)
     {
         $this->cells = $cells;
-        $this->neighborFinder = new NeighborFinder($this->cells);
+        $this->neighborFinder = new NeighborFinder();
     }
 
     public function nextGeneration(): World
     {
         $worldBuilder = new WorldBuilder();
-        $originalCell = $this->cells[1][1];
-        $cell = $originalCell->nextGeneration($this->numberOfAliveNeighbors(1, 1));
-        $worldBuilder->setCell(1, 1, $cell);
+        foreach ($this->cells as $numberOfRow => $row) {
+            foreach ($row as $numberOfCol => $cell) {
+                $nextGenerationCell = $cell->nextGeneration($this->numberOfAliveNeighbors($numberOfRow, $numberOfCol));
+                $worldBuilder->setCell($numberOfRow, $numberOfCol, $nextGenerationCell);
+            }
+        }
 
         return $worldBuilder->build();
     }

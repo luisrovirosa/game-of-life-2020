@@ -9,6 +9,16 @@ use PHPUnit\Framework\TestCase;
 
 class WorldTest extends TestCase
 {
+    /** @test */
+    public function worlds_that_does_not_change(): void
+    {
+        $world = (new WorldBuilder())->withAliveCells([[0, 0], [0, 1], [1, 0], [1, 1]])->build();
+
+        $nextGeneration = $world->nextGeneration();
+
+        $this->assertEquals("**.\n**.\n...", $nextGeneration->toString());
+    }
+
     /**
      * @test
      * @dataProvider noAliveNeighbor
