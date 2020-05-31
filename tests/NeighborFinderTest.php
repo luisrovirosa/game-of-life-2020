@@ -30,6 +30,7 @@ class NeighborFinderTest extends TestCase
         return [
             'at position 0,0' => [0, 0, 3],
             'at position 0,1' => [0, 1, 5],
+            'at position 0,2' => [0, 2, 3],
             'at position 1,0' => [1, 0, 5],
             'at position 1,1' => [1, 1, 8],
             'at position 1,2' => [1, 2, 5],
