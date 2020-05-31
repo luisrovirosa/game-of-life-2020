@@ -7,6 +7,12 @@ dependencies:
 	composer install
 run:
 	./console gof:run
+run-blinker:
+	./console gof:run -t 500 -g 10 -f data/blinker_3x3.txt
+run-glider:
+	./console gof:run -t 500 -g 20 -f data/glider_10x10.txt
+run-pulsar:
+	./console gof:run -t 500 -g 20 -f data/pulsar_period3.txt
 tests:
 	./vendor/bin/phpunit --color=always
 coverage:
@@ -19,6 +25,12 @@ docker-build:
 
 docker-run:
 	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make run
+docker-run-blinker:
+	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-blinker
+docker-run-glider:
+	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-glider
+docker-run-pulsar:
+	@docker run --rm -t -v ${PWD}:/opt/project php-docker-bootstrap make run-pulsar
 docker-tests:
 	@docker run --rm -v ${PWD}:/opt/project php-docker-bootstrap make tests
 docker-coverage:
