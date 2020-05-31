@@ -10,14 +10,9 @@ class CellsBuilder
 
     public function __construct(array $cells = null)
     {
-        $stringCells = $cells ?? array_fill(0, 3, array_fill(0, 3, '.'));
-
-        foreach ($stringCells as $rowPosition => $rowContent) {
-            foreach ($rowContent as $colPosition => $cellValue) {
-                $cell = $cellValue === '*' ? Cell::alive() : Cell::dead();
-                $this->setCell($rowPosition, $colPosition, $cell);
-            }
-        }
+        $numberOfRows = 3;
+        $numberOfCols = 3;
+        $this->withCells($cells, $numberOfRows, $numberOfCols);
     }
 
     /**
@@ -45,6 +40,20 @@ class CellsBuilder
     public function withAliveCells(array $neighbors): self
     {
         array_map(fn(array $neighbor) => $this->aliveAt($neighbor[0], $neighbor[1]), $neighbors);
+
+        return $this;
+    }
+
+    public function withCells(?array $cells, int $numberOfRows, int $numberOfCols): self
+    {
+        $stringCells = $cells ?? array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
+
+        foreach ($stringCells as $rowPosition => $rowContent) {
+            foreach ($rowContent as $colPosition => $cellValue) {
+                $cell = $cellValue === '*' ? Cell::alive() : Cell::dead();
+                $this->setCell($rowPosition, $colPosition, $cell);
+            }
+        }
 
         return $this;
     }
