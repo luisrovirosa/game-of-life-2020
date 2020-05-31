@@ -34,7 +34,7 @@ class GameOfLifeCommandTest extends TestCase
     /** @test */
     public function does_not_fail_when_run(): void
     {
-        $exitNumber = $this->command->execute([]);
+        $exitNumber = $this->executeCommand([]);
 
         $this->assertEquals(0, $exitNumber);
     }
@@ -42,7 +42,7 @@ class GameOfLifeCommandTest extends TestCase
     /** @test */
     public function prints_initial_world(): void
     {
-        $this->command->execute(['--generations' => 0]);
+        $this->executeCommand(['--generations' => 0]);
 
         $this->assertPrintsOnlyInitialWorld();
     }
@@ -50,7 +50,7 @@ class GameOfLifeCommandTest extends TestCase
     /** @test */
     public function initial_world_can_be_defined(): void
     {
-        $this->command->execute(['world' => '*** *** ***']);
+        $this->executeCommand(['world' => '*** *** ***']);
 
         $this->assertStringContainsString("***\n***\n***", $this->output());
     }
@@ -59,8 +59,8 @@ class GameOfLifeCommandTest extends TestCase
     public function a_number_of_generations_can_be_specified(): void
     {
         $numberOfGenerations = 10;
-        
-        $this->command->execute(['--generations' => $numberOfGenerations]);
+
+        $this->executeCommand(['--generations' => $numberOfGenerations]);
 
         $this->assertPrintsGenerations($numberOfGenerations);
     }
@@ -70,7 +70,7 @@ class GameOfLifeCommandTest extends TestCase
     {
         $numberOfGenerations = 2;
 
-        $this->command->execute(['--generations' => $numberOfGenerations]);
+        $this->executeCommand(['--generations' => $numberOfGenerations]);
 
         $this->clock->wait(self::ONE_SECOND_IN_MILLISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
     }
@@ -80,7 +80,7 @@ class GameOfLifeCommandTest extends TestCase
     {
         $timeBetweenGenerations = 0;
 
-        $this->command->execute(['--time_between_generations' => $timeBetweenGenerations]);
+        $this->executeCommand(['--time_between_generations' => $timeBetweenGenerations]);
 
         $this->clock->wait($timeBetweenGenerations)->shouldHaveBeenCalled();
     }
@@ -98,5 +98,10 @@ class GameOfLifeCommandTest extends TestCase
     private function output(): string
     {
         return $this->command->getDisplay();
+    }
+
+    private function executeCommand(array $input): int
+    {
+        return $this->command->execute($input, ['capture_stderr_separately' => true]);
     }
 }
