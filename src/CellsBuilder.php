@@ -6,13 +6,14 @@ namespace Katas;
 
 class CellsBuilder
 {
-    private $cells;
+    /** @var Cell[][] */
+    private array $cells;
 
-    public function __construct(array $cells = null)
+    public function __construct()
     {
         $numberOfRows = 3;
         $numberOfCols = 3;
-        $stringCells = $cells ?? array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
+        $stringCells = array_fill(0, $numberOfRows, array_fill(0, $numberOfCols, '.'));
         $this->withCells($stringCells);
     }
 
