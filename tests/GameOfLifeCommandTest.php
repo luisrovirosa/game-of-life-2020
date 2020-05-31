@@ -52,7 +52,7 @@ class GameOfLifeCommandTest extends TestCase
     {
         $this->executeCommand(['world' => '*** *** ***']);
 
-        $this->assertStringContainsString("***\n***\n***", $this->output());
+        $this->assertStringContainsString("  *  *  *  \n  *  *  *  \n  *  *  *", $this->output());
     }
 
     /** @test */
@@ -90,7 +90,7 @@ class GameOfLifeCommandTest extends TestCase
     {
         $this->executeCommand(['--file' => 'data/blinker_3x3.txt']);
 
-        $this->assertStringContainsString(".*.\n.*.\n.*.", $this->output());
+        $this->assertStringContainsString("  .  *  .  \n  .  *  .  \n  .  *  .", $this->output());
     }
 
     private function assertPrintsOnlyInitialWorld(): void

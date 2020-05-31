@@ -60,6 +60,7 @@ class GameOfLifeCommand extends Command
     {
         $output->clear();
         $output->writeln($header);
-        $output->writeln($gameOfLife->toString());
+        $worldToPrint = '  ' . implode('  ', str_split($gameOfLife->toString()));
+        $output->writeln($worldToPrint);
     }
 }
