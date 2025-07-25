@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Katas\Tests;
 
 use Katas\Clock;
 use Katas\GameOfLifeCommand;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -31,7 +32,7 @@ class GameOfLifeCommandTest extends TestCase
         $this->command = new CommandTester($gameOfLife);
     }
 
-    /** @test */
+    #[Test]
     public function does_not_fail_when_run(): void
     {
         $exitNumber = $this->executeCommand([]);
@@ -39,7 +40,7 @@ class GameOfLifeCommandTest extends TestCase
         $this->assertEquals(0, $exitNumber);
     }
 
-    /** @test */
+    #[Test]
     public function prints_initial_world(): void
     {
         $this->executeCommand(['--generations' => 0]);
@@ -47,15 +48,15 @@ class GameOfLifeCommandTest extends TestCase
         $this->assertPrintsOnlyInitialWorld();
     }
 
-    /** @test */
+    #[Test]
     public function initial_world_can_be_defined(): void
     {
         $this->executeCommand(['world' => '*** *** ***']);
 
-        $this->assertStringContainsString("  *  *  *  \n  *  *  *  \n  *  *  *", $this->output());
+        $this->assertStringContainsString("  *  *  *  \n  *  *  *  \n  *  *  *", $this->getOutput());
     }
 
-    /** @test */
+    #[Test]
     public function a_number_of_generations_can_be_specified(): void
     {
         $numberOfGenerations = 10;
@@ -65,7 +66,7 @@ class GameOfLifeCommandTest extends TestCase
         $this->assertPrintsGenerations($numberOfGenerations);
     }
 
-    /** @test */
+    #[Test]
     public function waits_1_second_after_every_generation(): void
     {
         $numberOfGenerations = 2;
@@ -75,7 +76,7 @@ class GameOfLifeCommandTest extends TestCase
         $this->clock->wait(self::ONE_SECOND_IN_MILLISECONDS)->shouldHaveBeenCalledTimes($numberOfGenerations);
     }
 
-    /** @test */
+    #[Test]
     public function the_time_between_generations_can_be_defined(): void
     {
         $timeBetweenGenerations = 0;
@@ -85,12 +86,12 @@ class GameOfLifeCommandTest extends TestCase
         $this->clock->wait($timeBetweenGenerations)->shouldHaveBeenCalled();
     }
 
-    /** @test */
+    #[Test]
     public function load_initial_world_from_a_file(): void
     {
         $this->executeCommand(['--file' => 'data/blinker_3x3.txt']);
 
-        $this->assertStringContainsString("  .  *  .  \n  .  *  .  \n  .  *  .", $this->output());
+        $this->assertStringContainsString("  .  *  .  \n  .  *  .  \n  .  *  .", $this->getOutput());
     }
 
     private function assertPrintsOnlyInitialWorld(): void
@@ -100,10 +101,10 @@ class GameOfLifeCommandTest extends TestCase
 
     private function assertPrintsGenerations(int $numberOfGenerations): void
     {
-        $this->assertCount(self::LINES_PER_ITERATION * ($numberOfGenerations + self::INITIAL_WORLD) + self::EXTRA_LINE, explode("\n", $this->output()));
+        $this->assertCount(self::LINES_PER_ITERATION * ($numberOfGenerations + self::INITIAL_WORLD) + self::EXTRA_LINE, explode("\n", $this->getOutput()), "Output:->{$this->getOutput()}<-");
     }
 
-    private function output(): string
+    private function getOutput(): string
     {
         return $this->command->getDisplay();
     }

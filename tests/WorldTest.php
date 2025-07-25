@@ -1,15 +1,17 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Katas\Tests;
 
 use Katas\WorldBuilder;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class WorldTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function worlds_that_does_not_change(): void
     {
         $world = (new WorldBuilder(3, 3))->withAliveCells([[0, 0], [0, 1], [1, 0], [1, 1]])->build();
@@ -19,7 +21,7 @@ class WorldTest extends TestCase
         $this->assertEquals("**.\n**.\n...", $nextGeneration->toString());
     }
 
-    /** @test */
+    #[Test]
     public function world_blinker(): void
     {
         $world = (new WorldBuilder(5, 5))->withAliveCells([[2, 1], [2, 2], [2, 3]])->build();
@@ -29,12 +31,9 @@ class WorldTest extends TestCase
         $this->assertEquals(".....\n..*..\n..*..\n..*..\n.....", $nextGeneration->toString());
     }
 
-    /**
-     * @test
-     * @dataProvider noAliveNeighbor
-     * @dataProvider oneAliveNeighbor
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('noAliveNeighbor')]
+    #[DataProvider('oneAliveNeighbor')]
     public function dies_by_underpopulation_when_is_alive_and_has_less_than_2_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
@@ -44,11 +43,8 @@ class WorldTest extends TestCase
         $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
-    /**
-     * @test
-     * @dataProvider twoAliveNeighbors
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('twoAliveNeighbors')]
     public function survives_when_is_alive_and_has_2_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
@@ -58,11 +54,8 @@ class WorldTest extends TestCase
         $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
-    /**
-     * @test
-     * @dataProvider threeAliveNeighbors
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('threeAliveNeighbors')]
     public function survives_when_is_alive_and_has_3_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
@@ -72,11 +65,8 @@ class WorldTest extends TestCase
         $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
-    /**
-     * @test
-     * @dataProvider moreThanThreeAliveNeighbors
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('moreThanThreeAliveNeighbors')]
     public function dies_when_is_alive_and_has_more_than_3_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->aliveAt(1, 1)->build();
@@ -86,14 +76,11 @@ class WorldTest extends TestCase
         $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
-    /**
-     * @test
-     * @dataProvider noAliveNeighbor
-     * @dataProvider oneAliveNeighbor
-     * @dataProvider twoAliveNeighbors
-     * @dataProvider moreThanThreeAliveNeighbors
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('noAliveNeighbor')]
+    #[DataProvider('oneAliveNeighbor')]
+    #[DataProvider('twoAliveNeighbors')]
+    #[DataProvider('moreThanThreeAliveNeighbors')]
     public function remains_dead_when_less_or_more_than_3_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->build();
@@ -103,11 +90,8 @@ class WorldTest extends TestCase
         $this->assertFalse($nextGeneration->isAlive(1, 1));
     }
 
-    /**
-     * @test
-     * @dataProvider threeAliveNeighbors
-     * @param array $aliveCells
-     */
+    #[Test]
+    #[DataProvider('threeAliveNeighbors')]
     public function reproduces_when_is_dead_and_has_3_neighbors(array $aliveCells): void
     {
         $world = $this->builderWithCellsAlive($aliveCells)->build();
@@ -117,14 +101,14 @@ class WorldTest extends TestCase
         $this->assertTrue($nextGeneration->isAlive(1, 1));
     }
 
-    public function noAliveNeighbor(): array
+    public static function noAliveNeighbor(): array
     {
         return [
             'no neighbors' => [[]],
         ];
     }
 
-    public function oneAliveNeighbor(): array
+    public static function oneAliveNeighbor(): array
     {
         return [
             'one neighbor at 0,0' => [[[0, 0]]],
@@ -138,7 +122,7 @@ class WorldTest extends TestCase
         ];
     }
 
-    public function twoAliveNeighbors(): array
+    public static function twoAliveNeighbors(): array
     {
         return [
             'two neighbor at 0,0 and 0,1' => [[[0, 0], [0, 1]]],
@@ -150,7 +134,7 @@ class WorldTest extends TestCase
         ];
     }
 
-    public function threeAliveNeighbors(): array
+    public static function threeAliveNeighbors(): array
     {
         return [
             'three neighbor at 0,0 and 0,1 and 0,2' => [[[0, 0], [0, 1], [0, 2]]],
@@ -162,7 +146,7 @@ class WorldTest extends TestCase
         ];
     }
 
-    public function moreThanThreeAliveNeighbors(): array
+    public static function moreThanThreeAliveNeighbors(): array
     {
         return [
             'four neighbor at 0,0 and 0,1 and 0,2 and 1,2' => [[[0, 0], [0, 1], [0, 2], [1, 2]]],

@@ -1,21 +1,18 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Katas\Tests;
 
 use Katas\NeighborFinder;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class NeighborFinderTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider scenariosOf3x3
-     * @param int $row
-     * @param int $col
-     * @param int $expectedNumberOfNeighbors
-     */
+    #[Test]
+    #[DataProvider('scenariosOf3x3')]
     public function find_the_number_of_alive_neighbors_in_3x3(int $row, int $col, int $expectedNumberOfNeighbors): void
     {
         $finder = new NeighborFinder(3, 3);
@@ -25,13 +22,8 @@ class NeighborFinderTest extends TestCase
         $this->assertCount($expectedNumberOfNeighbors, $numberOfAliveNeighbors);
     }
 
-    /**
-     * @test
-     * @dataProvider scenariosOf5x5
-     * @param int $row
-     * @param int $col
-     * @param int $expectedNumberOfNeighbors
-     */
+    #[Test]
+    #[DataProvider('scenariosOf5x5')]
     public function find_the_number_of_alive_neighbors_in_5x5(int $row, int $col, int $expectedNumberOfNeighbors): void
     {
         $finder = new NeighborFinder(5, 5);
@@ -41,7 +33,7 @@ class NeighborFinderTest extends TestCase
         $this->assertCount($expectedNumberOfNeighbors, $numberOfAliveNeighbors);
     }
 
-    public function scenariosOf3x3(): array
+    public static function scenariosOf3x3(): array
     {
         return [
             'at position 0,0' => [0, 0, 3],
@@ -56,7 +48,7 @@ class NeighborFinderTest extends TestCase
         ];
     }
 
-    public function scenariosOf5x5(): array
+    public static function scenariosOf5x5(): array
     {
         return [
             'at position 0,0' => [0, 0, 3],

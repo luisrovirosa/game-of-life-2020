@@ -3,11 +3,12 @@
 namespace Katas\Tests;
 
 use Katas\GameOfLife;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class GameOfLifeTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function mutates_the_world(): void
     {
         $world = [
@@ -22,7 +23,7 @@ class GameOfLifeTest extends TestCase
         $this->assertEquals("...\n...\n...", $gameOfLife->toString());
     }
 
-    /** @test */
+    #[Test]
     public function mutates_a_5x5_world(): void
     {
         $world = [

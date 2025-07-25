@@ -1,6 +1,6 @@
-FROM php:7.4
+FROM php:8.3
 
-MAINTAINER Luis Rovirosa Mairlot <luis@codium.team>
+LABEL maintainer="Luis Rovirosa Mairlot <luis@codium.team>"
 
 # Composer and dependencies
 RUN apt-get update && \

@@ -15,7 +15,7 @@ class GameOfLifeCommand extends Command
     protected static $defaultName = 'gof:run';
     private Clock $clock;
 
-    public function __construct(Clock $clock = null)
+    public function __construct(?Clock $clock = null)
     {
         parent::__construct(null);
         $this->clock = $clock ?? new Clock();
