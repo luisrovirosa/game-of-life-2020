@@ -58,7 +58,7 @@ class GameOfLifeCommand extends Command
 
     protected function printGameOfLife(string $header, GameOfLife $gameOfLife, OutputInterface $output): void
     {
-        $output->clear();
+        $output->write("\033[H\033[J");
         $output->writeln($header);
         $worldToPrint = '  ' . implode('  ', str_split($gameOfLife->toString()));
         $output->writeln($worldToPrint);
